@@ -1,11 +1,10 @@
-// MainPageController.java
 package edu.virginia.sde.reviews;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class MainPageController {
+public class CourseSearchScreenController {
 
     @FXML
     private Label mainPageLabel;

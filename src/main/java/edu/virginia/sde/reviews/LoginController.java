@@ -5,11 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class LoginController {
 
@@ -35,7 +31,7 @@ public class LoginController {
 
         // Password Check
         if (isValidUser(username, password)) {
-            openMainPage();
+            openCourseSearchScreen();
         } else {
             messageLabel.setText("Invalid username or password.");
         }
@@ -48,8 +44,8 @@ public class LoginController {
         return verificationResult;
     }
 
-    private void openMainPage() {
+    private void openCourseSearchScreen() {
         MainFileApplication mainApp = new MainFileApplication();
-        mainApp.showMainPageScreen(primaryStage);
+        mainApp.showCourseSearchScreen(primaryStage);
     }
 }

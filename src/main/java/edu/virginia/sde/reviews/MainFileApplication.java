@@ -31,17 +31,17 @@ public class MainFileApplication extends Application {
         }
     }
 
-    void showMainPageScreen(Stage stage) {
+    void showCourseSearchScreen(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseSearchScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Main Page");
+            stage.setTitle("Course Search Screen");
             stage.setScene(scene);
 
             //same thing
-            MainPageController mainPageController = fxmlLoader.getController();
-            mainPageController.setPrimaryStage(stage);
+            CourseSearchScreenController CourseSearchScreenController = fxmlLoader.getController();
+            CourseSearchScreenController.setPrimaryStage(stage);
 
             stage.show();
         } catch (IOException e) {
