@@ -1,4 +1,3 @@
-// LoginController.java
 package edu.virginia.sde.reviews;
 
 import javafx.fxml.FXML;
@@ -16,13 +15,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    private TextField newUsernameField;
-
-    @FXML
-    private PasswordField newPasswordField;
-
-    @FXML
-    private Label messageLabel, newAccountMessageLabel;
+    private Label messageLabel;
 
     private Stage primaryStage; // Reference to the stage
 
@@ -43,30 +36,6 @@ public class LoginController {
         }
     }
 
-    @FXML
-    private void createAccountButtonAction() {
-        String username = newUsernameField.getText();
-        String password = newPasswordField.getText();
-
-        if (password.length() < 8) {
-            newAccountMessageLabel.setText("Password is too short.");
-            return;
-        }
-
-        //TODO: check if username exists in database
-        boolean usernameExists = true;  //temp true
-
-        if (usernameExists) {
-            newAccountMessageLabel.setText("The username " + username + " is already in use. Try another username.");
-            return;
-        }
-
-        //TODO: add username and password to database
-
-        newAccountMessageLabel.setText("Account Created Successfully, Sign in Above.");
-    }
-
-
     private boolean isValidUser(String username, String password) {
         // TODO password authentication
         boolean verificationResult = true;
@@ -75,7 +44,7 @@ public class LoginController {
     }
 
     private void openCourseSearchScreen() {
-        MainFileApplication mainApp = new MainFileApplication();
+        CourseReviewsApplication mainApp = new CourseReviewsApplication();
         mainApp.showCourseSearchScreen(primaryStage);
     }
 }

@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-public class MainFileApplication extends Application {
+public class CourseReviewsApplication extends Application {
     public void start(Stage primaryStage) {
         showLoginScreen(primaryStage);
     }

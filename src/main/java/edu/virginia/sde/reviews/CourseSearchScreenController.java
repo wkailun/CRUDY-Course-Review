@@ -17,7 +17,7 @@ public class CourseSearchScreenController {
 
     @FXML
     private void logoutButtonAction() {
-        MainFileApplication mainApp = new MainFileApplication();
+        CourseReviewsApplication mainApp = new CourseReviewsApplication();
         mainApp.showLoginScreen(primaryStage);
     }
 }
