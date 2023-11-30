@@ -5,7 +5,7 @@
 1) Name, netid, [GitHub profile name]
 2) Name, netid, [GitHub profile name]
 3) Name, netid, [GitHub profile name]
-4) Name, netid, [GitHub profile name]
+4) Davis Wang, bqe6ue, dwang618
 
 ## To Run
 

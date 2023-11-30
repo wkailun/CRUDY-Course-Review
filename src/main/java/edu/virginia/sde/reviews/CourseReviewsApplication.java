@@ -14,15 +14,12 @@ public class CourseReviewsApplication extends Application {
 
     void showLoginScreen(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setTitle("Login");
             stage.setScene(scene);
 
-            // Access the controller if needed:idk yet
-            LoginController loginController = fxmlLoader.getController();
-            loginController.setPrimaryStage(stage);
 
             stage.show();
         } catch (IOException e) {
