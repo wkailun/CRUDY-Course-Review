@@ -12,27 +12,69 @@ public class CourseReviewsApplication extends Application {
         showLoginScreen(primaryStage);
     }
 
-    void showLoginScreen(Stage stage) {
+    void showLoginScreen(Stage currentStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Login");
-            stage.setScene(scene);
 
+            // Create a new stage
+            Stage newStage = new Stage();
+            newStage.setTitle("Login Screen");
+            newStage.setScene(scene);
 
-            stage.show();
+            // Hide the current stage
+            currentStage.hide();
+
+            // Show the new stage
+            newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    void showCourseReviewsScreen(Stage stage) {
+    void showCourseSearchScreen(Stage currentStage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseSearchScreen.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            // Create a new stage
+            Stage newStage = new Stage();
+            newStage.setTitle("Course Search Screen");
+            newStage.setScene(scene);
+
+            currentStage.hide();
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void showCourseReviewsScreen(Stage currentStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseReviewsScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Course Reviews Screen");
+
+            // Create a new stage
+            Stage newStage = new Stage();
+            newStage.setTitle("Course Reviews Screen");
+            newStage.setScene(scene);
+
+            currentStage.hide();
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void showMyReviewsScreen(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyReviewsScreen.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("My Reviews Screen");
             stage.setScene(scene);
 
             stage.show();

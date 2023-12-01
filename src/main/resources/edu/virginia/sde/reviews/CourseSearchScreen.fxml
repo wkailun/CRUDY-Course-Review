@@ -4,9 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchScreenController">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchScreenController">
     <children>
         <Label layoutX="60.0" layoutY="26.0" text="Welcome to the Course Search Screen!" />
-        <Button layoutX="80.0" layoutY="120.0" mnemonicParsing="false" onAction="#logoutButtonAction" text="Logout" />
+        <Button fx:id="logoutButton" layoutX="80.0" layoutY="120.0" mnemonicParsing="false" onAction="#logoutButtonAction" text="Logout" />
+
+        <!-- temp buttons -->
+        <Button fx:id="myReviewsButton" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" onAction="#myReviewsButtonAction" text="tmp my Reviews screen" />
+        <Button fx:id="courseReviewsButton" layoutX="80.0" layoutY="250.0" mnemonicParsing="false" onAction="#courseReviewsButtonAction" text="tmp course review screen" />
     </children>
 </AnchorPane>

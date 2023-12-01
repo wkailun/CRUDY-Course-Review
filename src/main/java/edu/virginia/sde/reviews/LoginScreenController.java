@@ -33,7 +33,7 @@ public class LoginScreenController {
             if (isCorrectPassword(username, password)) {
                 CourseReviewsApplication mainApp = new CourseReviewsApplication();
                 Stage stage = new Stage();
-                mainApp.showCourseReviewsScreen(stage);
+                mainApp.showCourseSearchScreen(stage);
                 loginbutton.getScene().getWindow().hide();
             }
             else{
