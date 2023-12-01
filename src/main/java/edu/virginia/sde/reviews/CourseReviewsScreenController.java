@@ -41,13 +41,10 @@ public class CourseReviewsScreenController {
     @FXML
     private void backButtonAction() {
         try {
-            //temporary send to review screen
-            FXMLLoader fxmlLoader = new FXMLLoader(CourseReviewsApplication.class.getResource("CourseSearchScreen.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            //sends back to login page
+            CourseReviewsApplication mainApp = new CourseReviewsApplication();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.setTitle("Review");
-            stage.show();
+            mainApp.showLoginScreen(stage);
             backbutton.getScene().getWindow().hide();
         }
         catch(Exception e) {
