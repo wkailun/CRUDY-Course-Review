@@ -18,9 +18,7 @@ public class LoginScreenController {
     @FXML
     private TextField passid;
     @FXML
-    private Button loginbutton;
-    @FXML
-    private Button registerbutton;
+    private Button loginbutton, registerbutton;
 
     @FXML
     private Label warninglabel;
@@ -31,33 +29,59 @@ public class LoginScreenController {
         String username = userid.getText();
         String password = passid.getText();
 
-        if(!isValidUser(username, password)) {
-            warninglabel.setText("get on a diet fat mf");
+        if (isValidUser(username)) {
+            if (isCorrectPassword(username, password)) {
+                CourseReviewsApplication mainApp = new CourseReviewsApplication();
+                Stage stage = new Stage();
+                mainApp.showCourseReviewsScreen(stage);
+                loginbutton.getScene().getWindow().hide();
+            }
+            else{
+                warninglabel.setText("Incorrect Username or Password.");
+            }
         }
         else{
-            warninglabel.setText("");
+            warninglabel.setText("Username not Registered.");
         }
     }
 
     @FXML
     private void registerButtonAction() {
         try {
-            //temporary send to review screen
-            FXMLLoader fxmlLoader = new FXMLLoader(CourseReviewsApplication.class.getResource("CourseReviewsScreen.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.setTitle("Review");
-            stage.show();
-            registerbutton.getScene().getWindow().hide();
+            String username = userid.getText();
+            String password = passid.getText();
+
+            if (isValidUser(username) && password.length() >= 8) {
+                //TODO: add user to database
+                warninglabel.setText("Account Registered.");
+            }
+            else if (isValidUser(username)) {
+                warninglabel.setText("Password to short.");
+            }
+            else {
+                warninglabel.setText("Username already Exists.");
+            }
         }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    private boolean isValidUser(String username, String password) {
-        //check for unique username and 8 character minimum password
+    private boolean isValidUser(String username) {
+        //check for username in database
+        if (username.equals("1234")) {         //temp
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isCorrectPassword(String username, String password) {
+        //check is password is correct for username
+        if (username.equals("1234") && password.equals("1234")) {         //temp
+            return true;
+        }
+
         return false;
     }
 
