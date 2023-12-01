@@ -63,6 +63,8 @@
                 <TextField fx:id="userid" layoutX="298.0" layoutY="106.0" promptText="enter username" />
                 <TextField fx:id="passid" layoutX="335.0" layoutY="136.0" promptText="enter password" />
                 <Label fx:id="warninglabel" layoutX="298.0" layoutY="191.0" textAlignment="CENTER" />
+
+                <Label fx:id="temp" layoutX="298.0" layoutY="301.0" textAlignment="CENTER" text="temp usr/pwd is 1234" />     <!-- temp  -->
             </children>
         </AnchorPane>
     </children>
