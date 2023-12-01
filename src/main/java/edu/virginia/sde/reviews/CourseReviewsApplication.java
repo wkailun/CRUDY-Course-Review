@@ -27,17 +27,13 @@ public class CourseReviewsApplication extends Application {
         }
     }
 
-    void showCourseSearchScreen(Stage stage) {
+    void showCourseReviewsScreen(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseSearchScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseReviewsScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            stage.setTitle("Course Search Screen");
+            stage.setTitle("Course Reviews Screen");
             stage.setScene(scene);
-
-            //same thing
-            CourseSearchScreenController CourseSearchScreenController = fxmlLoader.getController();
-            CourseSearchScreenController.setPrimaryStage(stage);
 
             stage.show();
         } catch (IOException e) {
