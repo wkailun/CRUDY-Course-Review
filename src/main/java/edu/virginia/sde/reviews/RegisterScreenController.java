@@ -39,6 +39,11 @@ public class RegisterScreenController {
         else {
             // TODO: Add user to the database
             warningLabel.setText("Account Registered.");
+
+            CourseReviewsApplication mainApp = new CourseReviewsApplication();
+            Stage stage = new Stage();
+            mainApp.showCourseSearchScreen(stage);
+            registerButton.getScene().getWindow().hide();
         }
     }
 
