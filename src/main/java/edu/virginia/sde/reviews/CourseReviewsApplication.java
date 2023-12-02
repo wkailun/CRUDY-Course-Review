@@ -33,6 +33,25 @@ public class CourseReviewsApplication extends Application {
         }
     }
 
+    void showRegisterScreen(Stage currentStage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RegisterScreen.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            // Create a new stage
+            Stage newStage = new Stage();
+            newStage.setTitle("Register Screen");
+            newStage.setScene(scene);
+
+            currentStage.hide();
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     void showCourseSearchScreen(Stage currentStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CourseSearchScreen.fxml"));

@@ -47,24 +47,30 @@ public class LoginScreenController {
 
     @FXML
     private void registerButtonAction() {
-        try {
-            String username = userid.getText();
-            String password = passid.getText();
 
-            if (isValidUser(username) && password.length() >= 8) {
-                //TODO: add user to database
-                warninglabel.setText("Account Registered.");
-            }
-            else if (isValidUser(username)) {
-                warninglabel.setText("Password to short.");
-            }
-            else {
-                warninglabel.setText("Username already Exists.");
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String username = userid.getText();
+//            String password = passid.getText();
+//
+//            if (isValidUser(username) && password.length() >= 8) {
+//                //TODO: add user to database
+//                warninglabel.setText("Account Registered.");
+//            }
+//            else if (isValidUser(username)) {
+//                warninglabel.setText("Password to short.");
+//            }
+//            else {
+//                warninglabel.setText("Username already Exists.");
+//            }
+//        }
+//        catch(Exception e) {
+//            e.printStackTrace();
+//        }
+
+        CourseReviewsApplication mainApp = new CourseReviewsApplication();
+        Stage stage = new Stage();
+        mainApp.showRegisterScreen(stage);
+        registerbutton.getScene().getWindow().hide();
     }
 
     private boolean isValidUser(String username) {
