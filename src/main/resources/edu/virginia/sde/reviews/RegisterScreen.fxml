@@ -7,21 +7,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.RegisterScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.RegisterScreenController">
    <children>
-      <Button fx:id="registerButton" layoutX="366.0" layoutY="314.0" mnemonicParsing="false" onAction="#registerButtonAction" text="Register" />
-      <Label layoutX="112.0" layoutY="138.0" prefHeight="17.0" prefWidth="129.0" text="Username:" />
-      <Label layoutX="112.0" layoutY="187.0" prefHeight="17.0" prefWidth="129.0" text="Set Password: " />
-      <Label layoutX="112.0" layoutY="241.0" prefHeight="17.0" prefWidth="118.0" text="Confirm Password: " />
-      <TextField fx:id="userID" layoutX="278.0" layoutY="133.0" prefHeight="26.0" prefWidth="221.0" promptText="enter username" />
-      <TextField fx:id="userPassword" layoutX="278.0" layoutY="183.0" prefHeight="26.0" prefWidth="221.0" promptText="enter password" />
-      <TextField fx:id="confirmPassword" layoutX="278.0" layoutY="236.0" prefHeight="26.0" prefWidth="221.0" promptText="enter password" />
-      <Text layoutX="204.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account" textAlignment="CENTER" wrappingWidth="192.8349609375">
+      <Button fx:id="registerButton" layoutX="408.0" layoutY="325.0" mnemonicParsing="false" onAction="#registerButtonAction" text="Register">
          <font>
-            <Font name="Verdana Bold" size="15.0" />
+            <Font name="LiHei Pro" size="13.0" />
+         </font></Button>
+      <Label layoutX="113.0" layoutY="139.0" prefHeight="17.0" prefWidth="129.0" text="Username:">
+         <font>
+            <Font name="LiHei Pro" size="14.0" />
+         </font></Label>
+      <Label layoutX="113.0" layoutY="192.0" prefHeight="17.0" prefWidth="129.0" text="Set Password: ">
+         <font>
+            <Font name="LiHei Pro" size="14.0" />
+         </font></Label>
+      <Label layoutX="113.0" layoutY="250.0" prefHeight="17.0" prefWidth="147.0" text="Confirm Password: ">
+         <font>
+            <Font name="LiHei Pro" size="14.0" />
+         </font></Label>
+      <TextField fx:id="userID" layoutX="298.0" layoutY="134.0" prefHeight="26.0" prefWidth="238.0" promptText="enter username">
+         <font>
+            <Font name="Lao Sangam MN" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="userPassword" layoutX="298.0" layoutY="188.0" prefHeight="26.0" prefWidth="238.0" promptText="enter password">
+         <font>
+            <Font name="Lao Sangam MN" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="confirmPassword" layoutX="298.0" layoutY="246.0" prefHeight="26.0" prefWidth="238.0" promptText="enter password">
+         <font>
+            <Font name="Lao Sangam MN" size="13.0" />
+         </font></TextField>
+      <Text layoutX="89.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register" textAlignment="CENTER" wrappingWidth="462.8349609375">
+         <font>
+            <Font name="Tamil MN Bold" size="47.0" />
          </font>
       </Text>
-      <Button fx:id="backButton" layoutX="173.0" layoutY="314.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="26.0" prefWidth="62.0" text="Back" />
-      <Label fx:id="warningLabel" layoutX="300.0" layoutY="287.0" textAlignment="CENTER" />
+      <Button fx:id="backButton" layoutX="178.0" layoutY="324.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="26.0" prefWidth="62.0" text="Back">
+         <font>
+            <Font name="LiHei Pro" size="13.0" />
+         </font></Button>
+      <Label fx:id="warningLabel" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="128.0" layoutY="285.0" prefHeight="17.0" prefWidth="385.0">
+         <font>
+            <Font name="Lao Sangam MN" size="13.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -28,9 +28,21 @@ public class RegisterScreenController {
         String confirmPass = confirmPassword.getText();
 
         if (!validateUsername(username) || !validatePassword(password)) {
-            warningLabel.setText("Invalid Username and/or Password");
+            if (!validateUsername(username) && !validatePassword(password)) {
+                warningLabel.setText("Invalid Username and Password.");
+            }
+            else if (!validatePassword(password)) {
+                if (password.length() < 8) {
+                    warningLabel.setText("Password must be at least 8 characters long. Please try again!");
+                }
+                else {
+                    warningLabel.setText("Invalid Password.");
+                }
+            }
+            else {
+                warningLabel.setText("Invalid Username. ");
+            }
         }
-
         // Confirm passwords match
         else if (!confirmPass.equals(password)) {
             warningLabel.setText("Passwords does not match. Please try again!");
