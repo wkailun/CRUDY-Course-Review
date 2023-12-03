@@ -5,14 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class MyReviewsScreenController {
-
+public class CourseSearchorAddController {
     @FXML
     private Label mainPageLabel;
+
     @FXML
     private Button backButton;
-
-
     @FXML
     private void backButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
@@ -20,5 +18,4 @@ public class MyReviewsScreenController {
         mainApp.showCourseSearchScreen(stage);
         backButton.getScene().getWindow().hide();
     }
-
 }

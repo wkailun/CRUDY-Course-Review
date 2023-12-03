@@ -11,7 +11,7 @@ public class CourseSearchScreenController {
     private Label mainPageLabel;
 
     @FXML
-    private Button myReviewsButton, courseReviewsButton, logoutButton;
+    private Button myReviewsButton, courseReviewsButton, logoutButton, searchForCourseButton;
 
     @FXML
     private void logoutButtonAction() {
@@ -35,6 +35,11 @@ public class CourseSearchScreenController {
         mainApp.showCourseReviewsScreen(stage);
         courseReviewsButton.getScene().getWindow().hide();
     }
-
-
+    @FXML
+    private void searchForCourseButtonAction() {
+        CourseReviewsApplication mainApp = new CourseReviewsApplication();
+        Stage stage = new Stage();
+        mainApp.showCourseSearchorAddScreen(stage);
+        searchForCourseButton.getScene().getWindow().hide();
+    }
 }

@@ -31,7 +31,6 @@ public class CourseReviews {
         this.rating = rating;
     }
 
-
     public Long getId() {
         return id;
     }

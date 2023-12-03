@@ -9,32 +9,42 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "Department", length = 4)
-    private String department;
+    @Column(name = "Mnemonic", length = 4)
+    private String Mnemonic;
+
+    @Column(name = "Course Title", length = 50)
+    private String courseTitle;
 
     @Column(name = "Catalog_Number", length = 4)
-    private Integer catalog_number;
+    private Integer catalogNumber;
 
     public Course() {
 
     }
-    public Course(String department, int catNum){
-        this.department = department;
-        this.catalog_number = catNum;
+    public Course(String Mnemonic, int catNum, String courseTitleAttempt){
+        this.Mnemonic = Mnemonic;
+        this.catalogNumber = catNum;
+        this.courseTitle = courseTitleAttempt;
     }
     public void setDepartment(String department) {
-        this.department = department;
+        this.Mnemonic = Mnemonic;
     }
     public void setCatalogNumber(int catalog_number) {
-        this.catalog_number = catalog_number;
+        this.catalogNumber = catalogNumber;
     }
     public int getID() {
         return id;
     }
-    public String getDepartment() {
-        return department;
+    public void setCourseTitle(String courseTitleAttempt) {
+        this.courseTitle = courseTitleAttempt;
+    }
+    public String getMnemonic() {
+        return Mnemonic;
     }
     public int getCatalogNumber() {
-        return this.catalog_number;
+        return this.catalogNumber;
+    }
+    public String getCourseTitle() {
+        return this.courseTitle;
     }
 }
