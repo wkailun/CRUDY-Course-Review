@@ -44,4 +44,12 @@ public class CourseSearchScreenController {
         mainApp.showCourseSearchorAddScreen(stage);
         searchForCourseButton.getScene().getWindow().hide();
     }
+    // Have to have this reset the table
+    @FXML
+    private void resetTableOnAction() {
+        CourseReviewsApplication mainApp = new CourseReviewsApplication();
+        Stage stage = new Stage();
+        mainApp.showCourseSearchorAddScreen(stage);
+        searchForCourseButton.getScene().getWindow().hide();
+    }
 }
