@@ -41,7 +41,7 @@ public class CourseReviewsScreenController {
     @FXML
     private void backButtonAction() {
         try {
-            //sends back to login page
+            //sends back to Course Search Screen page
             CourseReviewsApplication mainApp = new CourseReviewsApplication();
             Stage stage = new Stage();
             mainApp.showCourseSearchScreen(stage);
