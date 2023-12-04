@@ -11,8 +11,6 @@ public class MyReviewsScreenController {
     private Label mainPageLabel;
     @FXML
     private Button backButton;
-
-
     @FXML
     private void backButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();

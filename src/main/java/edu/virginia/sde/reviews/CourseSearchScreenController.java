@@ -35,6 +35,8 @@ public class CourseSearchScreenController {
         mainApp.showCourseReviewsScreen(stage);
         courseReviewsButton.getScene().getWindow().hide();
     }
+    // Both add and search actions are linked to the same button, its actions defined below
+    // Their separate purposes are handled in a separate class called "CourseSearchorAddController"
     @FXML
     private void searchForCourseButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();

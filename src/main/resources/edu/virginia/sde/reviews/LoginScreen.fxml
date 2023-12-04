@@ -35,7 +35,6 @@
                   <Font name="Lao Sangam MN" size="13.0" />
                </font></Label>
 
-                <Label fx:id="temp" layoutX="267.0" layoutY="320.0" text="temp usr/pwd is 1234" textAlignment="CENTER" />
             <Text layoutX="254.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
                   <Font name="Tamil MN Bold" size="48.0" />

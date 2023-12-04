@@ -1,3 +1,4 @@
+// LoginController.java
 package edu.virginia.sde.reviews;
 
 import javafx.fxml.FXML;
@@ -23,57 +24,49 @@ public class LoginScreenController {
     private Label warninglabel;
 
 
+    // Current assumption: Usernames are case-sensitive, so "Hugo" is not the same username as "hugo"
+    // Login info ( you can either create a new one or you can use the following):
+    // Username: Hugo
+    // Password: 12345678
     @FXML
     private void loginButtonAction() {
         String username = userid.getText();
         String password = passid.getText();
 
-        if (isCorrectPassword(username, password)) {
-            CourseReviewsApplication mainApp = new CourseReviewsApplication();
-            Stage stage = new Stage();
-            mainApp.showCourseSearchScreen(stage);
-            loginbutton.getScene().getWindow().hide();
+        if (isValidUser(username)) {
+            if (isCorrectPassword(username, password)) {
+                CourseReviewsApplication mainApp = new CourseReviewsApplication();
+                Stage stage = new Stage();
+                mainApp.showCourseSearchScreen(stage);
+                loginbutton.getScene().getWindow().hide();
+            } else if (username.isEmpty()){
+                warninglabel.setText("Please enter a valid username.");
+            } else if (password.isEmpty()) {
+                warninglabel.setText("Please enter a password.");
+            } else if (!isCorrectPassword(username, password)) {
+                warninglabel.setText("Incorrect password.");
+            }
+        } else if (username.isEmpty() & !password.isEmpty()) {
+            warninglabel.setText("Please enter a username.");
         }
-        else {
-            warninglabel.setText("Incorrect Username or Password.");
+        else{
+            warninglabel.setText("Invalid Username or Password.");
         }
     }
 
     @FXML
     private void registerButtonAction() {
-
-//        try {
-//            String username = userid.getText();
-//            String password = passid.getText();
-//
-//            if (isValidUser(username) && password.length() >= 8) {
-//                //TODO: add user to database
-//                warninglabel.setText("Account Registered.");
-//            }
-//            else if (isValidUser(username)) {
-//                warninglabel.setText("Password to short.");
-//            }
-//            else {
-//                warninglabel.setText("Username already Exists.");
-//            }
-//        }
-//        catch(Exception e) {
-//            e.printStackTrace();
-//        }
-
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
         Stage stage = new Stage();
         mainApp.showRegisterScreen(stage);
         registerbutton.getScene().getWindow().hide();
     }
 
+    private boolean isValidUser(String username) {
+        return DatabaseController.checkUsernameExistence(username);
+    }
 
     private boolean isCorrectPassword(String username, String password) {
-        //check is password is correct for username
-        if (username.equals("1234") && password.equals("1234")) {         //temp
-            return true;
-        }
-
         return DatabaseController.checkUserExistence(username, password);
     }
 
