@@ -1,4 +1,3 @@
-// LoginController.java
 package edu.virginia.sde.reviews;
 
 import javafx.fxml.FXML;
@@ -29,19 +28,14 @@ public class LoginScreenController {
         String username = userid.getText();
         String password = passid.getText();
 
-        if (isValidUser(username)) {
-            if (isCorrectPassword(username, password)) {
-                CourseReviewsApplication mainApp = new CourseReviewsApplication();
-                Stage stage = new Stage();
-                mainApp.showCourseSearchScreen(stage);
-                loginbutton.getScene().getWindow().hide();
-            }
-            else{
-                warninglabel.setText("Incorrect Username or Password.");
-            }
+        if (isCorrectPassword(username, password)) {
+            CourseReviewsApplication mainApp = new CourseReviewsApplication();
+            Stage stage = new Stage();
+            mainApp.showCourseSearchScreen(stage);
+            loginbutton.getScene().getWindow().hide();
         }
-        else{
-            warninglabel.setText("Username not Registered.");
+        else {
+            warninglabel.setText("Incorrect Username or Password.");
         }
     }
 
@@ -73,14 +67,6 @@ public class LoginScreenController {
         registerbutton.getScene().getWindow().hide();
     }
 
-    private boolean isValidUser(String username) {
-        //check for username in database
-        if (username.equals("1234")) {         //temp
-            return true;
-        }
-
-        return false;
-    }
 
     private boolean isCorrectPassword(String username, String password) {
         //check is password is correct for username
@@ -88,7 +74,7 @@ public class LoginScreenController {
             return true;
         }
 
-        return false;
+        return DatabaseController.checkUserExistence(username, password);
     }
 
 }
