@@ -10,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
-
 public class CourseSearchorAddController {
     public Button btnLogOff;
     public TableView tblCourses;
@@ -26,7 +24,6 @@ public class CourseSearchorAddController {
     private String username;
     @FXML
     private Label mainPageLabel;
-
     @FXML
     private Button backButton;
     @FXML
