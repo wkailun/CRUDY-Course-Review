@@ -44,7 +44,7 @@ public class CourseReviewsScreenController {
             //sends back to login page
             CourseReviewsApplication mainApp = new CourseReviewsApplication();
             Stage stage = new Stage();
-            mainApp.showLoginScreen(stage);
+            mainApp.showCourseSearchScreen(stage);
             backbutton.getScene().getWindow().hide();
         }
         catch(Exception e) {
