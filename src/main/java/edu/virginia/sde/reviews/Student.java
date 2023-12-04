@@ -11,7 +11,7 @@ public class Student {
     @Column(name = "password")
     private String password1;
     @Id
-    @Column(name = "Student ID")
+    @Column(name = "StudentID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -47,5 +47,4 @@ public class Student {
     public String getPassword() {
         return password1;
     }
-
 }

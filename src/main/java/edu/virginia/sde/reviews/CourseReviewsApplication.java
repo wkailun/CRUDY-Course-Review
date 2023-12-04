@@ -10,6 +10,28 @@ import java.io.IOException;
 public class CourseReviewsApplication extends Application {
     public void start(Stage primaryStage) {
         showLoginScreen(primaryStage);
+
+        if(DatabaseController.getAllCourses().size() == 0){
+            initDB();
+        }
+
+    }
+
+    public void initDB() {
+        Student dummyStudent;
+        dummyStudent = new Student("Hugo", "12345678");
+
+        DatabaseController.registerNewLoginInformation(dummyStudent);
+
+        Course dummyCourse;
+        dummyCourse = new Course("CS", 3140, "Software Development Essentials");
+
+        DatabaseController.registerNewCourse(dummyCourse);
+
+        CourseReviews r11;
+        r11 = new CourseReviews(dummyStudent, dummyCourse, "Learned a lot. Lots of time spent on this class.", 4);
+
+        DatabaseController.registerStudentReview(r11);
     }
 
     void showLoginScreen(Stage currentStage) {

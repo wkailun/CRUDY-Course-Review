@@ -3,10 +3,10 @@ package edu.virginia.sde.reviews;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Course Reviews")
+@Table(name = "CourseReviews")
 public class CourseReviews {
     @Id
-    @Column(name = "id")
+    @Column(name = "CourseReivew_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
@@ -18,6 +18,7 @@ public class CourseReviews {
     @Column(name = "message")
     private String message;
 
+    // Going to need to change this to double for average rating
     @Column(name = "rating")
     private Integer rating;
 

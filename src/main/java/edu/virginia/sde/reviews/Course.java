@@ -12,7 +12,7 @@ public class Course {
     @Column(name = "Mnemonic", length = 4)
     private String Mnemonic;
 
-    @Column(name = "Course Title", length = 50)
+    @Column(name = "CourseTitle", length = 50)
     private String courseTitle;
 
     @Column(name = "Catalog_Number", length = 4)

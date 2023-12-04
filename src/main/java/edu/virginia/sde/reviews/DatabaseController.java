@@ -63,6 +63,35 @@ public class DatabaseController {
         return false;
     }
 
+    public static boolean checkUsernameExistence(String name) {
+        Configuration hibernateConfiguration = new Configuration();
+        hibernateConfiguration.configure("hibernate.cfg.xml");
+        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        List<Student> registeredStudents = session.createQuery("FROM Student").list();
+
+        // Going through all registered students
+        for (var student : registeredStudents) {
+            // Student exists AND
+            // the username matches the password (and password is correct) = true
+            if (student.getUsername().equals(name)) {
+                session.getTransaction().commit();
+                session.close();
+                sessionFactory.close();
+                return true;
+            }
+        }
+
+        // No match = close transaction and return false
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
+        return false;
+    }
+
     // Assuming student exists, populate table with reviews that the student has written
     public static List<CourseReviews> getAllReviewsByStudentName(String studentName) {
         Configuration hibernateConfiguration = new Configuration();
