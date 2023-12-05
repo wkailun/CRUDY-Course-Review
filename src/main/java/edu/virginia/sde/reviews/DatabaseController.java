@@ -319,7 +319,7 @@ public class DatabaseController {
 
 
     // Get course by course mnemonic and course number
-    public static List<Course> getCourseByMnemonicAndCourseNumber(String courseMnemonic, int courseNumber) {
+    public static Course getCourseByMnemonicAndCourseNumber(String courseMnemonic, int courseNumber) {
         try {
             Configuration hibernateConfiguration = new Configuration();
             hibernateConfiguration.configure("hibernate.cfg.xml");
@@ -337,15 +337,52 @@ public class DatabaseController {
                 session.getTransaction().commit();
                 session.close();
                 sessionFactory.close();
-                return nameAndMnemonicCourseList;
+                if(nameAndMnemonicCourseList.size() > 0) return nameAndMnemonicCourseList.get(0);
+                return null;
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return Collections.emptyList();
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return Collections.emptyList();
+            return null;
+        }
+    }
+
+    // Get the ratings from review
+    public static CourseReviews getCourseReviewFromMnemonicAndNumber(Course coursePassed) {
+        try {
+            try {
+                Configuration hibernateConfiguration = new Configuration();
+                hibernateConfiguration.configure("hibernate.cfg.xml");
+                SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+                try (Session session = sessionFactory.openSession()) {
+                    session.beginTransaction();
+
+                    // Use parameter binding to avoid SQL injection
+                    // Have to add couse mnemonic and catalog number
+                    List<CourseReviews> reviews = session.createQuery("FROM CourseReviews r WHERE r.courses = :course")
+                            .setParameter("course", coursePassed)
+                            .list();
+
+                    session.getTransaction().commit();
+                    if (reviews.size() > 0) {
+                        return reviews.get(0);
+                    }
+                    return null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -379,6 +416,24 @@ public class DatabaseController {
         courseReviewRatingAverage = Double.parseDouble(df.format(courseReviewRatingAverage));
 
         return courseReviewRatingAverage;
+    }
+
+    public static int getCourseRatingInteger(CourseReviews courseReviewRating) {
+        int courseReviewRatingAverage = 0;
+
+        Configuration hibernateConfiguration = new Configuration();
+        hibernateConfiguration.configure("hibernate.cfg.xml");
+        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        List<CourseReviews> matchingReviews = session.createQuery(
+                        "FROM CourseReviews courseReview1 WHERE courseReview1.rating = :courseReviewRatingIndividual", CourseReviews.class)
+                .setParameter("courseReviewRatingIndividual", courseReviewRating)
+                .list();
+
+        return 0;
     }
 
 }

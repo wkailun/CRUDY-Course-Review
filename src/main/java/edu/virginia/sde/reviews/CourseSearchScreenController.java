@@ -1,9 +1,17 @@
 package edu.virginia.sde.reviews;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseSearchScreenController {
 
@@ -51,5 +59,75 @@ public class CourseSearchScreenController {
         Stage stage = new Stage();
         mainApp.showCourseSearchorAddScreen(stage);
         searchForCourseButton.getScene().getWindow().hide();
+    }
+    public TableView tableCourses;
+    public Button btnSubmit;
+
+    @FXML
+    public void initialize() {
+        initializeTables();
+    }
+    public void initializeTables(){
+        List<Course> coursesList = DatabaseController.getAllCourses();
+        List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
+
+        for(var course: coursesList) {
+            ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+            tempTable.setCourseNumber(course.getID());
+            tempTable.setCourseMnemonic(course.getMnemonic());
+            tempTable.setCourseTitle(course.getCourseTitle());
+
+            String courseMnemonic = course.getMnemonic();
+            int courseNum = course.getID();
+
+            CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+            tempTable.setCourseRating(reviews.getRating());
+
+            existingCoursesToPopulateTable.add(tempTable);
+        }
+
+        ObservableList<ReviewedCoursesTable> existingCoursesToPopulateList = FXCollections.observableArrayList(existingCoursesToPopulateTable);
+        tableCourses.setItems(existingCoursesToPopulateList);
+
+        TableColumn<ReviewedCoursesTable,String> courseTitleTable = new TableColumn<ReviewedCoursesTable,String>("Course Title");
+        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("CourseTitle"));
+        TableColumn<ReviewedCoursesTable,String> courseMnemonicTable = new TableColumn<ReviewedCoursesTable,String>("Mnemonic");
+        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("Mnemonic"));
+        TableColumn<ReviewedCoursesTable,Integer> courseCatalogNumberTable = new TableColumn<ReviewedCoursesTable,Integer>("Course Number");
+        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("CourseCatalogNumber"));
+        TableColumn<ReviewedCoursesTable,Integer> courseRatingTable = new TableColumn<ReviewedCoursesTable,Integer>("Course Rating");
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("CourseRating"));
+
+        tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
+
+
+/*        tblCourses.getFocusModel().focusedCellProperty().addListener(
+                new ChangeListener<TablePosition>() {
+                    @Override
+                    public void changed(ObservableValue<? extends TablePosition> observable,
+                                        TablePosition oldPos, TablePosition pos) {
+                        int row = pos.getRow();
+                        Object obj = tblCourses.getFocusModel().getFocusedItem();
+                        CourseReviewTable tmp = (CourseReviewTable)obj;
+                        assert tmp != null;
+                        if(tmp.getMessage() == null){
+                            btnSubmit.setDisable(false);
+                            txtReviewMessage.setDisable(false);
+                            txtRating.setDisable(false);
+                            txtRating.setText("");
+                            txtReviewMessage.setText("");
+                            return;
+                        } else {
+                            txtReviewMessage.setDisable(true);
+                            txtRating.setDisable(true);
+                            btnSubmit.setDisable(true);
+                        }
+                        txtReviewMessage.setText(tmp.getMessage());
+                        txtRating.setText(Integer.toString(tmp.getRating()));
+
+                        setReviewItems(false);
+                    }
+                });
+        setReviewItems(false);*/
     }
 }

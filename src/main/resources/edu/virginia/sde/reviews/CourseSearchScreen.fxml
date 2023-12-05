@@ -27,7 +27,7 @@
         </Text>
 
         <HBox alignment="CENTER" spacing="10" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-            <TableView prefHeight="276.0" prefWidth="288.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <TableView fx:id="tableCourses" prefHeight="276.0" prefWidth="288.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                 <columns>
                     <TableColumn prefWidth="75.0" text="C1"/>
                 </columns>

@@ -11,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class LoginScreenController {
 
     @FXML
@@ -48,12 +50,26 @@ public class LoginScreenController {
             }
         } else if (username.isEmpty() & !password.isEmpty()) {
             warninglabel.setText("Please enter a username.");
+            printDatabaseContents();
         }
         else{
             warninglabel.setText("Invalid Username or Password.");
         }
     }
 
+    public void printDatabaseContents() {
+        System.out.println("\nCourses:");
+        List<Course> courses = DatabaseController.getAllCourses();
+        for (Course course : courses) {
+            System.out.println(course);
+        }
+
+        System.out.println("\nCourse Reviews:");
+        List<CourseReviews> reviews = DatabaseController.getAllReviews();
+        for (CourseReviews review : reviews) {
+            System.out.println(review);
+        }
+    }
     @FXML
     private void registerButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
