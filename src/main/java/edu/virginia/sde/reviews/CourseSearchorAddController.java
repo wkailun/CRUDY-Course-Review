@@ -35,7 +35,7 @@ public class CourseSearchorAddController {
     }
 
     public void onAddCourse(ActionEvent actionEvent) {
-        String courseMnemonic = textMnemonic.getText();
+        String courseMnemonic = textMnemonic.getText().toUpperCase();
         String courseCatalog = textCourseCatalogNumber.getText();
         String courseAddTitle = textCourseTitle.getText();
 
@@ -64,7 +64,7 @@ public class CourseSearchorAddController {
         else if (courseCatalog.length() != 4) {
             warning = "Catalog number must be four digits long.";
             warningLabel.setText(warning);
-        } else if (!courseAddTitle.matches("[a-zA-Z]+")) {
+        } else if (!courseAddTitle.matches("[a-zA-Z\\s]+")) {
             warning = "Course title must be made up of characters.";
             warningLabel.setText(warning);
         }else if (courseAddTitle.length() < 1) {
