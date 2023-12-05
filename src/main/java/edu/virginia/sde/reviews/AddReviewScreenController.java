@@ -36,6 +36,8 @@ public class AddReviewScreenController {
         CourseReviews tempReview = new CourseReviews();
         tempReview.setMessage(comment);
         tempReview.setRating(Integer.parseInt(rating));
+        // Also, need to check that the user has not already submitted a review for this class
+        // Needs username component
         DatabaseController.registerStudentReview(tempReview);
 
 

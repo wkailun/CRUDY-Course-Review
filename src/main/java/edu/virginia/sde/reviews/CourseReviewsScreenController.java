@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUsername;
 
 public class CourseReviewsScreenController {
     @FXML
@@ -25,7 +26,8 @@ public class CourseReviewsScreenController {
     @FXML
     private Button addbutton, deletebutton, backbutton; // Use the correct Button class
     @FXML
-    private TableView allCourseSpecReviews, myCourseSpecReviews;
+    private TableView allCourseSpecReviews, myCourseSpecReviews, myReviewedCourses;
+
     @FXML
     public void initialize() {
         initializeTables();
@@ -53,11 +55,28 @@ public class CourseReviewsScreenController {
             courseSpecReviewsForTable.add(tempTable);
         }
 
+        List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
+        List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
+
+        for (CourseReviews review : reviewsList) {
+            MyReviewsTable tempTable = new MyReviewsTable();
+
+            tempTable.setCourseTitle(review.getCourses().getCourseTitle());
+            tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
+            tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
+            tempTable.setCourseRating(review.getRating());
+
+            existingMyReviewsToPopulateTable.add(tempTable);
+        }
 
         ObservableList<MyReviewsTable> existingMyCourseSpecReviewsToPopulateList =
                 FXCollections.observableArrayList(courseSpecReviewsForTable);
-        myCourseSpecReviews.setItems(existingMyCourseSpecReviewsToPopulateList);
+//        myCourseSpecReviews.setItems(existingMyCourseSpecReviewsToPopulateList);
         allCourseSpecReviews.setItems(existingMyCourseSpecReviewsToPopulateList);
+
+        ObservableList<MyReviewsTable> existingMyReviewsToPopulateList =
+                FXCollections.observableArrayList(existingMyReviewsToPopulateTable);
+        myCourseSpecReviews.setItems(existingMyReviewsToPopulateList);
 
         configureTableColumn(myCourseSpecReviews, "Course Title", "courseTitle", String.class);
         configureTableColumn(myCourseSpecReviews,"Mnemonic", "courseMnemonic", String.class);

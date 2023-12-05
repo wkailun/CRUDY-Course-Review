@@ -48,4 +48,10 @@ public class CourseReviews {
         return rating;
     }
     public Course getCourses() { return courses; }
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+    public void setCourses(Course courses) {
+        this.courses = courses;
+    }
 }
