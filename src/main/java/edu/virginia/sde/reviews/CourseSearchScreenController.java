@@ -78,9 +78,10 @@ public class CourseSearchScreenController {
             tempTable.setCourseTitle(course.getCourseTitle());
 
             String courseMnemonic = course.getMnemonic();
-            int courseNum = course.getID();
+            int courseNum = course.getCatalogNumber();
 
             CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+             //tempTable.setCourseRating(reviews.getRating());
             tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
 
             existingCoursesToPopulateTable.add(tempTable);
