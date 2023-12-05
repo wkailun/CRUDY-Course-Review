@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUsername;
+
 
 public class MyReviewsScreenController {
 
@@ -23,7 +25,7 @@ public class MyReviewsScreenController {
 
     @FXML
     private void initialize() {
-        List<CourseReviews> reviewsList = DatabaseController.getAllReviews();
+        List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
 
         List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
 

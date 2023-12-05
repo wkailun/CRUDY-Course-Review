@@ -24,7 +24,7 @@ public class LoginScreenController {
 
     @FXML
     private Label warninglabel;
-    public static Student loggedStudent;
+    public static String loggedStudentUsername;
 
     private static String username;
     private static String password;
@@ -44,7 +44,7 @@ public class LoginScreenController {
 
         if (isValidUser(username)) {
             if (isCorrectPassword(username, password)) {
-                loggedStudent = new Student(username, password);
+                loggedStudentUsername = username;
                 CourseReviewsApplication mainApp = new CourseReviewsApplication();
                 Stage stage = new Stage();
                 mainApp.showCourseSearchScreen(stage);
