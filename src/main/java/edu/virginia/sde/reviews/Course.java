@@ -21,8 +21,8 @@ public class Course {
     public Course() {
 
     }
-    public Course(String Mnemonic, int catNum, String courseTitleAttempt){
-        this.Mnemonic = Mnemonic;
+    public Course(String mnemonic, int catNum, String courseTitleAttempt) {
+        this.Mnemonic = mnemonic;
         this.catalogNumber = catNum;
         this.courseTitle = courseTitleAttempt;
     }
@@ -40,6 +40,9 @@ public class Course {
     }
     public String getMnemonic() {
         return Mnemonic;
+    }
+    public void setMnemonic(String mnemonic) {
+        this.Mnemonic = mnemonic;
     }
     public int getCatalogNumber() {
         return this.catalogNumber;

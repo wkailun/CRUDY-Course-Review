@@ -89,14 +89,18 @@ public class CourseSearchScreenController {
         ObservableList<ReviewedCoursesTable> existingCoursesToPopulateList = FXCollections.observableArrayList(existingCoursesToPopulateTable);
         tableCourses.setItems(existingCoursesToPopulateList);
 
-        TableColumn<ReviewedCoursesTable,String> courseTitleTable = new TableColumn<ReviewedCoursesTable,String>("Course Title");
-        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("CourseTitle"));
-        TableColumn<ReviewedCoursesTable,String> courseMnemonicTable = new TableColumn<ReviewedCoursesTable,String>("Mnemonic");
-        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("Mnemonic"));
-        TableColumn<ReviewedCoursesTable,Integer> courseCatalogNumberTable = new TableColumn<ReviewedCoursesTable,Integer>("Course Number");
-        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("CourseCatalogNumber"));
-        TableColumn<ReviewedCoursesTable,Integer> courseRatingTable = new TableColumn<ReviewedCoursesTable,Integer>("Course Rating");
-        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("CourseRating"));
+        TableColumn<ReviewedCoursesTable, String> courseTitleTable = new TableColumn<>("Course Title");
+        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("courseTitle"));
+
+        TableColumn<ReviewedCoursesTable, String> courseMnemonicTable = new TableColumn<>("Mnemonic");
+        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("courseMnemonic"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseCatalogNumberTable = new TableColumn<>("Course Number");
+        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
+
 
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
 

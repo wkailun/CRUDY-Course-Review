@@ -362,7 +362,7 @@ public class DatabaseController {
                     session.beginTransaction();
 
                     // Use parameter binding to avoid SQL injection
-                    // Have to add couse mnemonic and catalog number
+                    // Have to add course mnemonic and catalog number
                     List<CourseReviews> reviews = session.createQuery("FROM CourseReviews r WHERE r.courses = :course")
                             .setParameter("course", coursePassed)
                             .list();
