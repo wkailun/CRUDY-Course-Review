@@ -8,7 +8,7 @@ public class ReviewedCoursesTable {
 
     private DoubleProperty averageRating;
 
-    private StringProperty courseMnemonic, courseTitle;
+    private StringProperty courseMnemonic, courseTitle, message;
 
     // Gets course number -- "3140" -- course number needs to be displayed
     // Required to be four digits
@@ -84,5 +84,15 @@ public class ReviewedCoursesTable {
     }
     public String getCourseTitle() {
         return courseTitleProperty().get();
+    }
+
+    public StringProperty reviewMessageProperty() {
+        return message;
+    }
+    public void setMessage(String message) {
+        reviewMessageProperty().set(message);
+    }
+    public String getMessage() {
+        return reviewMessageProperty().get();
     }
 }

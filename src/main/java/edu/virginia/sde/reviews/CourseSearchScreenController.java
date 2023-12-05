@@ -1,21 +1,22 @@
 package edu.virginia.sde.reviews;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSearchScreenController {
-
+    private static String mnemonic;
+    private static int number;
+    private static String title;
+    
     @FXML
     private Label mainPageLabel;
 
@@ -105,48 +106,41 @@ public class CourseSearchScreenController {
 
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
 
-        tableCourses.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                handleRowDoubleClick();
-            }
-        });
 
-
-/*        tblCourses.getFocusModel().focusedCellProperty().addListener(
+        tableCourses.getFocusModel().focusedCellProperty().addListener(
                 new ChangeListener<TablePosition>() {
                     @Override
-                    public void changed(ObservableValue<? extends TablePosition> observable,
-                                        TablePosition oldPos, TablePosition pos) {
-                        int row = pos.getRow();
-                        Object obj = tblCourses.getFocusModel().getFocusedItem();
-                        CourseReviewTable tmp = (CourseReviewTable)obj;
+                    public void changed(ObservableValue<? extends TablePosition> observable, TablePosition oldValue, TablePosition newValue) {
+                        //System.out.println("bag alert major bag alert");
+                        int row = newValue.getRow();
+                        Object obj = tableCourses.getFocusModel().getFocusedItem();
+                        ReviewedCoursesTable tmp = (ReviewedCoursesTable) obj;
                         assert tmp != null;
-                        if(tmp.getMessage() == null){
-                            btnSubmit.setDisable(false);
-                            txtReviewMessage.setDisable(false);
-                            txtRating.setDisable(false);
-                            txtRating.setText("");
-                            txtReviewMessage.setText("");
-                            return;
-                        } else {
-                            txtReviewMessage.setDisable(true);
-                            txtRating.setDisable(true);
-                            btnSubmit.setDisable(true);
-                        }
-                        txtReviewMessage.setText(tmp.getMessage());
-                        txtRating.setText(Integer.toString(tmp.getRating()));
 
-                        setReviewItems(false);
+                        mnemonic = tmp.getCourseMnemonic();
+                        number = tmp.getCourseNumber();
+                        title = tmp.getCourseTitle();
+
+                        setReviewItems(true);
                     }
+
                 });
-        setReviewItems(false);*/
-    }
-    private void handleRowDoubleClick() {
-        ReviewedCoursesTable selectedRow = (ReviewedCoursesTable) tableCourses.getSelectionModel().getSelectedItem();
-        if (selectedRow != null) {
-            System.out.println("Double-clicked on row: " + selectedRow.getCourseTitle());
-            // Should take you to the course review for that course
-        }
+        setReviewItems(false);
     }
 
+    private void setReviewItems(boolean b) {
+        courseReviewsButton.setVisible(b);
+    }
+
+    public static String getMnemonic() {
+        return mnemonic;
+    }
+
+    public static int getNumber() {
+        return number;
+    }
+
+    public static String getTitle() {
+        return title;
+    }
 }

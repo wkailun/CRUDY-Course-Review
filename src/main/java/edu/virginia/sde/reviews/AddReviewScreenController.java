@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class AddReviewScreenController {
     @FXML
@@ -32,6 +33,11 @@ public class AddReviewScreenController {
 
         //add to database to use later in review screen controller
         //TODO
+        CourseReviews tempReview = new CourseReviews();
+        tempReview.setMessage(comment);
+        tempReview.setRating(Integer.parseInt(rating));
+        DatabaseController.registerStudentReview(tempReview);
+
 
         try {
             //temporary send to review screen

@@ -8,7 +8,7 @@ public class CourseReviews {
     @Id
     @Column(name = "CourseReivew_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "Student_ID")
     Student student;
@@ -32,7 +32,7 @@ public class CourseReviews {
         this.rating = rating;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setMessage(String message) {
