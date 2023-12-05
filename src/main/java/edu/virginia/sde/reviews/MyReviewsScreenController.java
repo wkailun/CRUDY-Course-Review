@@ -8,6 +8,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MyReviewsScreenController {
@@ -15,30 +19,52 @@ public class MyReviewsScreenController {
     @FXML
     private Button backButton;
 
-    @FXML
-    private TableView<CourseReviews> myReviewsTable;
-    @FXML
-    private TableColumn<CourseReviews, String> courseMnemonicColumn, messageColumn;
-    @FXML
-    private TableColumn<CourseReviews, Integer> courseNumberColumn, ratingColumn;
-
+    public TableView<MyReviewsTable> tableMyReviews;
 
     @FXML
     private void initialize() {
-        // Initialize TableView columns
-        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courses.catalogNumber"));
-        courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("courses.Mnemonic"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+        List<CourseReviews> reviewsList = DatabaseController.getAllReviews();
 
-        // Load data into TableView
-        ObservableList<CourseReviews> reviewsList = FXCollections.observableArrayList(
-                DatabaseController.getAllReviewsByStudentName("YourStudentName")
-        );
-        myReviewsTable.setItems(reviewsList);
+        List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
+
+        for (CourseReviews review : reviewsList) {
+            MyReviewsTable tempTable = new MyReviewsTable();
+
+            tempTable.setCourseTitle(review.getCourses().getCourseTitle());
+            tempTable.setCourseNumber(review.getCourses().getID());
+            tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
+            tempTable.setCourseRating(review.getRating());
+
+            existingMyReviewsToPopulateTable.add(tempTable);
+        }
+
+        ObservableList<MyReviewsTable> existingMyReviewsToPopulateList =
+                FXCollections.observableArrayList(existingMyReviewsToPopulateTable);
+        tableMyReviews.setItems(existingMyReviewsToPopulateList);
+
+        configureTableColumn("Course Title", "courseTitle", String.class);
+        configureTableColumn("Mnemonic", "courseMnemonic", String.class);
+        configureTableColumn("Course Number", "courseNumber", Integer.class);
+        configureTableColumn("Course Rating", "courseRating", Integer.class);
+
+        tableMyReviews.setOnMouseClicked(this::handleRowClick);
     }
 
 
+
+    private <T> void configureTableColumn(String columnName, String propertyName, Class<T> propertyType) {
+        TableColumn<MyReviewsTable, T> column = new TableColumn<>(columnName);
+        column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        tableMyReviews.getColumns().add(column);
+    }
+    private void handleRowClick(MouseEvent event) {
+        if (event.getClickCount() == 1) {
+            MyReviewsTable selectedRow = tableMyReviews.getSelectionModel().getSelectedItem();
+            if (selectedRow != null) {
+                System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
+            }
+        }
+    }
 
     @FXML
     private void backButtonAction() {

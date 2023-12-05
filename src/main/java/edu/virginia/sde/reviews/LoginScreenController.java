@@ -24,7 +24,7 @@ public class LoginScreenController {
 
     @FXML
     private Label warninglabel;
-
+    public static Student loggedStudent;
 
     // Current assumption: Usernames are case-sensitive, so "Hugo" is not the same username as "hugo"
     // Login info ( you can either create a new one or you can use the following):
@@ -37,6 +37,7 @@ public class LoginScreenController {
 
         if (isValidUser(username)) {
             if (isCorrectPassword(username, password)) {
+                loggedStudent = new Student(username, password);
                 CourseReviewsApplication mainApp = new CourseReviewsApplication();
                 Stage stage = new Stage();
                 mainApp.showCourseSearchScreen(stage);
