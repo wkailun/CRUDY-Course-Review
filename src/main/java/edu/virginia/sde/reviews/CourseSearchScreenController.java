@@ -73,7 +73,7 @@ public class CourseSearchScreenController {
 
         for(var course: coursesList) {
             ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
-            tempTable.setCourseNumber(course.getID());
+            tempTable.setCourseNumber(course.getCatalogNumber());
             tempTable.setCourseMnemonic(course.getMnemonic());
             tempTable.setCourseTitle(course.getCourseTitle());
 
@@ -81,7 +81,7 @@ public class CourseSearchScreenController {
             int courseNum = course.getID();
 
             CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
-            tempTable.setCourseRating(reviews.getRating());
+            tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
 
             existingCoursesToPopulateTable.add(tempTable);
         }
@@ -100,7 +100,6 @@ public class CourseSearchScreenController {
 
         TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
         courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
-
 
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
 

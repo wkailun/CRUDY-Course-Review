@@ -36,7 +36,7 @@ public class RegisterScreenController {
             toRegisterStudent = new Student(username, password);
             DatabaseController.registerNewLoginInformation(toRegisterStudent);
 
-            warningLabel.setText("Account Registered!");
+            warningLabel.setText("Account Registered! Returning to login...");
             PauseTransition pause = new PauseTransition(Duration.seconds(0.8));
 
             // Actions post pause

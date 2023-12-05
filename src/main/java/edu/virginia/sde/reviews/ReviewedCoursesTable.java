@@ -52,7 +52,8 @@ public class ReviewedCoursesTable {
         courseRatingProperty().set(value);
     }
     public Integer getCourseRating() {
-        return courseRatingProperty().get();
+        Integer rating = courseRatingProperty().get();
+        return rating != null ? rating : 0;
     }
 
     // Gets course mnemonics -- "CS"
