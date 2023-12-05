@@ -26,10 +26,7 @@ public class Course {
         this.catalogNumber = catNum;
         this.courseTitle = courseTitleAttempt;
     }
-    public void setDepartment(String department) {
-        this.Mnemonic = Mnemonic;
-    }
-    public void setCatalogNumber(int catalog_number) {
+    public void setCatalogNumber(int catalogNumber) {
         this.catalogNumber = catalogNumber;
     }
     public int getID() {

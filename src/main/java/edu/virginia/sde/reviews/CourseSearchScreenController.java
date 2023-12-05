@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -104,6 +105,12 @@ public class CourseSearchScreenController {
 
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
 
+        tableCourses.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                handleRowDoubleClick();
+            }
+        });
+
 
 /*        tblCourses.getFocusModel().focusedCellProperty().addListener(
                 new ChangeListener<TablePosition>() {
@@ -134,4 +141,12 @@ public class CourseSearchScreenController {
                 });
         setReviewItems(false);*/
     }
+    private void handleRowDoubleClick() {
+        ReviewedCoursesTable selectedRow = (ReviewedCoursesTable) tableCourses.getSelectionModel().getSelectedItem();
+        if (selectedRow != null) {
+            System.out.println("Double-clicked on row: " + selectedRow.getCourseTitle());
+            // Should take you to the course review for that course
+        }
+    }
+
 }

@@ -75,8 +75,9 @@ public class CourseSearchorAddController {
             warningLabel.setText(warning);
         } else {
             Course tempCourse = new Course();
-            tempCourse.setDepartment(courseMnemonic);
+            tempCourse.setMnemonic(courseMnemonic);
             tempCourse.setCatalogNumber(Integer.parseInt(courseCatalog));
+            tempCourse.setCourseTitle(courseAddTitle);
             DatabaseController.registerNewCourse(tempCourse);
 
             //initUsername(username);
@@ -84,19 +85,14 @@ public class CourseSearchorAddController {
             textCourseCatalogNumber.setText("");
             textCourseTitle.setText("");
             warningLabel.setText("New course added!");
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.8));
 
-            // Actions post pause
-            pause.setOnFinished(event -> {
-                // Return to course search screen after the delay
-                CourseReviewsApplication mainApp = new CourseReviewsApplication();
-                Stage stage = new Stage();
-                mainApp.showCourseSearchScreen(stage);
-                addCourseButton.getScene().getWindow().hide();
-            });
 
-            // start pause
-            pause.play();
+            // Return to course search screen after the delay
+            CourseReviewsApplication mainApp = new CourseReviewsApplication();
+            Stage stage = new Stage();
+            mainApp.showCourseSearchScreen(stage);
+            addCourseButton.getScene().getWindow().hide();
+
         }
     }
 
