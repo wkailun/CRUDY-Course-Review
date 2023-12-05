@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class CourseReviewsApplication extends Application {
+
+
     public void start(Stage primaryStage) {
         showLoginScreen(primaryStage);
 

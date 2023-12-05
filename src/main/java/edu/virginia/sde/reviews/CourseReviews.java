@@ -47,4 +47,5 @@ public class CourseReviews {
     public int getRating() {
         return rating;
     }
+    public Course getCourses() { return courses; }
 }

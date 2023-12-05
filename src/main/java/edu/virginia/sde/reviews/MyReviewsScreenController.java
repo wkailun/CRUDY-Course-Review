@@ -9,35 +9,66 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class MyReviewsScreenController {
 
     @FXML
     private Button backButton;
 
-    @FXML
-    private TableView<CourseReviews> myReviewsTable;
-    @FXML
-    private TableColumn<CourseReviews, String> courseMnemonicColumn, messageColumn;
-    @FXML
-    private TableColumn<CourseReviews, Integer> courseNumberColumn, ratingColumn;
-
+    public TableView tableMyReviews;
 
     @FXML
     private void initialize() {
-        // Initialize TableView columns
-        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courses.catalogNumber"));
-        courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("courses.Mnemonic"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
 
-        // Load data into TableView
-        ObservableList<CourseReviews> reviewsList = FXCollections.observableArrayList(
-                DatabaseController.getAllReviewsByStudentName("YourStudentName")
-        );
-        myReviewsTable.setItems(reviewsList);
+        List<CourseReviews> reviewsList = DatabaseController.getAllReviews();
+
+        List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
+
+        for (CourseReviews review : reviewsList) {
+            MyReviewsTable tempTable = new MyReviewsTable();
+
+            tempTable.setCourseTitle(review.getCourses().getCourseTitle());
+            tempTable.setCourseNumber(review.getCourses().getID());
+            tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
+            tempTable.setCourseRating(review.getRating());
+            tempTable.setReviewMessage(review.getMessage());
+
+
+            existingMyReviewsToPopulateTable.add(tempTable);
+        }
+
+        ObservableList<MyReviewsTable> existingMyReviewsToPopulateList =
+                FXCollections.observableArrayList(existingMyReviewsToPopulateTable);
+        tableMyReviews.setItems(existingMyReviewsToPopulateList);
+
+        TableColumn<MyReviewsTable, String> courseTitleTable = new TableColumn<>("Course Title");
+        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("CourseTitle"));
+
+        TableColumn<MyReviewsTable, String> courseMnemonicTable = new TableColumn<>("Mnemonic");
+        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("Mnemonic"));
+
+        TableColumn<MyReviewsTable, Integer> courseCatalogNumberTable = new TableColumn<>("Course Number");
+        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("CourseCatalogNumber"));
+
+        TableColumn<MyReviewsTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("CourseRating"));
+
+        TableColumn<MyReviewsTable, String> courseMessageTable = new TableColumn<>("Rating Message");
+        courseMessageTable.setCellValueFactory(new PropertyValueFactory<>("RatingMessage"));
+
+        tableMyReviews.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable, courseMessageTable);
     }
 
+
+    private void configureTableColumn(String columnName, String propertyName, Class<?> propertyType) {
+        TableColumn<ReviewedCoursesTable, ?> column = new TableColumn<>(columnName);
+        column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        tableMyReviews.getColumns().add(column);
+    }
 
 
     @FXML

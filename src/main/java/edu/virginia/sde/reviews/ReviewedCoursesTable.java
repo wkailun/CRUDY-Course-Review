@@ -49,7 +49,7 @@ public class ReviewedCoursesTable {
         return courseRating;
     }
     public void setCourseRating(Integer value) {
-        courseRatingProperty().set(value);
+        courseAverageRatingProperty().set(value);
     }
     public Integer getCourseRating() {
         return courseRatingProperty().get();

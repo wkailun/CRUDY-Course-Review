@@ -9,7 +9,7 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsScreenController">
     <VBox alignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.bottomAnchor="40.0" AnchorPane.topAnchor="20.0" spacing="10" VBox.vgrow="ALWAYS">
         <Label text="My Reviews">
             <font>
@@ -17,7 +17,7 @@
             </font>
         </Label>
 
-        <TableView fx:id="myReviewsTable" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tableMyReviews" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="courseMnemonicColumn" prefWidth="75.0" text="Course Mnemonic"/>
                 <TableColumn fx:id="courseNumberColumn" prefWidth="75.0" text="Course Number"/>
