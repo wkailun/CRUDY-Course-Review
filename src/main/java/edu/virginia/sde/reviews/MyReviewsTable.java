@@ -62,18 +62,4 @@ public class MyReviewsTable {
     }
 
 
-
-    public StringProperty reviewCommentProperty() {
-        if (reviewComment == null) {
-            reviewComment = new SimpleStringProperty(this, "Review Comment");
-        }
-        return reviewComment;
-    }
-    public void setReviewMessage(String value) {
-        reviewCommentProperty().set(value);
-    }
-    public String getReviewMessage() {
-        return reviewCommentProperty().get();
-    }
-
 }
