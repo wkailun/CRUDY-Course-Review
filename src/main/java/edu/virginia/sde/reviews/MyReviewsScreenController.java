@@ -31,7 +31,7 @@ public class MyReviewsScreenController {
             MyReviewsTable tempTable = new MyReviewsTable();
 
             tempTable.setCourseTitle(review.getCourses().getCourseTitle());
-            tempTable.setCourseNumber(review.getCourses().getID());
+            tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
             tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
             tempTable.setCourseRating(review.getRating());
 
