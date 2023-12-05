@@ -26,14 +26,21 @@ public class LoginScreenController {
     private Label warninglabel;
     public static Student loggedStudent;
 
+    private static String username;
+    private static String password;
+
+    public static String getUsername(){
+        return username;
+    }
+
     // Current assumption: Usernames are case-sensitive, so "Hugo" is not the same username as "hugo"
     // Login info ( you can either create a new one or you can use the following):
     // Username: Hugo
     // Password: 12345678
     @FXML
     private void loginButtonAction() {
-        String username = userid.getText();
-        String password = passid.getText();
+        username = userid.getText();
+        password = passid.getText();
 
         if (isValidUser(username)) {
             if (isCorrectPassword(username, password)) {

@@ -159,6 +159,7 @@ public class DatabaseController {
 
     // Register student review
     public static void registerStudentReview(CourseReviews review) {
+        String username = LoginScreenController.getUsername();
         Configuration hibernateConfiguration = new Configuration();
         hibernateConfiguration.configure("hibernate.cfg.xml");
         SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
