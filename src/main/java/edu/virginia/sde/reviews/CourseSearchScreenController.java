@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -105,27 +106,20 @@ public class CourseSearchScreenController {
         courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
 
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
-
-
-        tableCourses.getFocusModel().focusedCellProperty().addListener(
-                new ChangeListener<TablePosition>() {
-                    @Override
-                    public void changed(ObservableValue<? extends TablePosition> observable, TablePosition oldValue, TablePosition newValue) {
-                        //System.out.println("bag alert major bag alert");
-                        int row = newValue.getRow();
-                        Object obj = tableCourses.getFocusModel().getFocusedItem();
-                        ReviewedCoursesTable tmp = (ReviewedCoursesTable) obj;
-                        assert tmp != null;
-
-                        mnemonic = tmp.getCourseMnemonic();
-                        number = tmp.getCourseNumber();
-                        title = tmp.getCourseTitle();
-
-                        setReviewItems(true);
-                    }
-
-                });
+        tableCourses.setOnMouseClicked(this::handleRowClick);
         setReviewItems(false);
+    }
+    private void handleRowClick(MouseEvent event) {
+        if (event.getClickCount() == 1) {
+            ReviewedCoursesTable selectedRow = (ReviewedCoursesTable) tableCourses.getSelectionModel().getSelectedItem();
+            if (selectedRow != null) {
+                System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
+                mnemonic = selectedRow.getCourseMnemonic();
+                number = selectedRow.getCourseNumber();
+                title = selectedRow.getCourseTitle();
+                setReviewItems(true);
+            }
+        }
     }
 
     private void setReviewItems(boolean b) {
