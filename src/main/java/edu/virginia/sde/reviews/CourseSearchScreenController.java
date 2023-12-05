@@ -70,11 +70,11 @@ public class CourseSearchScreenController {
     public void initialize() {
         initializeTables();
     }
-    public void initializeTables(){
+    public void initializeTables() {
         List<Course> coursesList = DatabaseController.getAllCourses();
         List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
 
-        for(var course: coursesList) {
+        for (var course : coursesList) {
             ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
             tempTable.setCourseNumber(course.getCatalogNumber());
             tempTable.setCourseMnemonic(course.getMnemonic());
@@ -84,7 +84,7 @@ public class CourseSearchScreenController {
             int courseNum = course.getCatalogNumber();
 
             CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
-             //tempTable.setCourseRating(reviews.getRating());
+            //tempTable.setCourseRating(reviews.getRating());
             tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
 
             existingCoursesToPopulateTable.add(tempTable);
@@ -122,19 +122,22 @@ public class CourseSearchScreenController {
         }
     }
 
-    private void setReviewItems(boolean b) {
+    public void setReviewItems(boolean b) {
         courseReviewsButton.setVisible(b);
     }
 
     public static String getMnemonic() {
         return mnemonic;
     }
+    public static void setMnemonic(String newMnemonic) { mnemonic = newMnemonic; }
 
     public static int getNumber() {
         return number;
     }
+    public static void setNumber(int newNumber) { number = newNumber; }
 
     public static String getTitle() {
         return title;
     }
+    public static void setTitle(String newTitle) { title = newTitle; }
 }

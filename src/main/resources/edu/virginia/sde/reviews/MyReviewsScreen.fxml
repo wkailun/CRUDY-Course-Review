@@ -16,6 +16,11 @@
                 <Font name="Tamil MN Bold" size="48.0"/>
             </font>
         </Label>
+        <Label text="Select Review to View">
+            <font>
+                <Font name="Tamil MN Bold" size="16.0"/>
+            </font>
+        </Label>
 
         <TableView fx:id="tableMyReviews" VBox.vgrow="ALWAYS"/>
 

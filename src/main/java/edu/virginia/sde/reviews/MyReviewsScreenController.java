@@ -23,9 +23,6 @@ public class MyReviewsScreenController {
 
     public TableView<MyReviewsTable> tableMyReviews;
 
-    private static String mnemonic;
-    private static int number;
-    private static String title;
 
     @FXML
     private void initialize() {
@@ -54,7 +51,6 @@ public class MyReviewsScreenController {
         configureTableColumn("Course Rating", "courseRating", Integer.class);
 
         tableMyReviews.setOnMouseClicked(this::handleRowClick);
-        setReviewItems(false);
     }
 
 
@@ -69,29 +65,12 @@ public class MyReviewsScreenController {
             MyReviewsTable selectedRow = tableMyReviews.getSelectionModel().getSelectedItem();
             if (selectedRow != null) {
                 System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
-                mnemonic = selectedRow.getCourseMnemonic();
-                number = selectedRow.getCourseNumber();
-                title = selectedRow.getCourseTitle();
-                setReviewItems(true);
+                CourseSearchScreenController.setMnemonic(selectedRow.getCourseMnemonic());
+                CourseSearchScreenController.setNumber(selectedRow.getCourseNumber());
+                CourseSearchScreenController.setTitle(selectedRow.getCourseTitle());
             }
         }
     }
-    private void setReviewItems(boolean b) {
-        viewReviewButton.setVisible(b);
-    }
-
-    public static String getMnemonic() {
-        return mnemonic;
-    }
-
-    public static int getNumber() {
-        return number;
-    }
-
-    public static String getTitle() {
-        return title;
-    }
-
 
     @FXML
     private void backButtonAction() {
