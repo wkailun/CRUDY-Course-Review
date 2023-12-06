@@ -34,6 +34,7 @@ public class CourseReviewsScreenController {
 
     private boolean myReviewExists;
     private CourseReviews myExistingReview;
+    private double avg;
     @FXML
     public void initialize() {
         initializeTables();
@@ -79,24 +80,27 @@ public class CourseReviewsScreenController {
             }
         }
 
-        double avg = getAvgRating(courseSpecificReviewsList);
-        avgratinglabel.setText("Average Rating is: " + avg);
+        avg = getAvgRating(courseSpecificReviewsList);
+        String formattedAvg = String.format("%.2f", avg);
+        avgratinglabel.setText("Average Rating is: " + formattedAvg);
 
 
         List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
         List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
 
         for (CourseReviews review : reviewsList) {
-            myExistingReview = review;
-            myReviewExists = true;
-            MyReviewsTable tempTable = new MyReviewsTable();
+            if(review.getCourses().getCourseTitle().equals(CourseSearchScreenController.getTitle())) {
+                myExistingReview = review;
+                myReviewExists = true;
+                MyReviewsTable tempTable = new MyReviewsTable();
 
-            tempTable.setCourseTitle(review.getCourses().getCourseTitle());
-            tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
-            tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
-            tempTable.setCourseRating(review.getRating());
+                tempTable.setCourseTitle(review.getCourses().getCourseTitle());
+                tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
+                tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
+                tempTable.setCourseRating(review.getRating());
 
-            existingMyReviewsToPopulateTable.add(tempTable);
+                existingMyReviewsToPopulateTable.add(tempTable);
+            }
         }
 
         ObservableList<MyReviewsTable> existingMyCourseSpecReviewsToPopulateList =
@@ -201,5 +205,9 @@ public class CourseReviewsScreenController {
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public double getAvg() {
+        return avg;
     }
 }

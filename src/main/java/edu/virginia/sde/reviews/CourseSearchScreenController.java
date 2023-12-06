@@ -231,7 +231,7 @@ public class CourseSearchScreenController {
 
                     //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
                     CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
-                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+                    tempTable.setAverageRating((double) (reviews != null ? reviews.getRating() : 0));
 
                     existingCoursesToPopulateTable.add(tempTable);
                 }
@@ -252,7 +252,7 @@ public class CourseSearchScreenController {
         courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
 
         TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
-        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseAverageRating"));
 
     }
     // Have to have this reset the table
