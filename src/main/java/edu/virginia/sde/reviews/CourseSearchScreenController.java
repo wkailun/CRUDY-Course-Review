@@ -20,6 +20,8 @@ public class CourseSearchScreenController {
     private static String mnemonic;
     private static int number;
     private static String title;
+    public static String mnemonicPublic, titlePublic;
+    public static int numberPublic;
 
     public TextField searchCourseTitle, searchCourseNumber, searchCourseMnemonic;
     
@@ -39,6 +41,8 @@ public class CourseSearchScreenController {
         logoutButton.getScene().getWindow().hide();
     }
 
+    //    public static String mnemonicPublic, titlePublic;
+    //    public static int numberPublic;
     @FXML
     private void myReviewsButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
@@ -54,6 +58,7 @@ public class CourseSearchScreenController {
         courseReviewsButton.getScene().getWindow().hide();
     }
 
+    // THIS IS FOR ADDING A NEW COURSE
     @FXML
     private void searchForCourseButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
@@ -342,14 +347,24 @@ public class CourseSearchScreenController {
         tableCourses.setOnMouseClicked(this::handleRowClick);
         setReviewItems(false);
     }
+    //    public static String mnemonicPublic, titlePublic;
+    //    public static int numberPublic;
     private void handleRowClick(MouseEvent event) {
         if (event.getClickCount() == 1) {
             ReviewedCoursesTable selectedRow = (ReviewedCoursesTable) tableCourses.getSelectionModel().getSelectedItem();
             if (selectedRow != null) {
-                System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
+                //System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
+                mnemonicPublic = selectedRow.getCourseMnemonic();
                 mnemonic = selectedRow.getCourseMnemonic();
+                //System.out.println("Mnemonic: " + selectedRow.getCourseMnemonic());
+
+                numberPublic = selectedRow.getCourseNumber();
                 number = selectedRow.getCourseNumber();
+                //System.out.println("number: " + selectedRow.getCourseNumber());
+
+                titlePublic = selectedRow.getCourseTitle();
                 title = selectedRow.getCourseTitle();
+                //System.out.println("title: " + selectedRow.getCourseTitle());
                 setReviewItems(true);
             }
         }

@@ -12,6 +12,13 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUsername;
+import static edu.virginia.sde.reviews.CourseSearchScreenController.mnemonicPublic;
+import static edu.virginia.sde.reviews.CourseSearchScreenController.titlePublic;
+import static edu.virginia.sde.reviews.CourseSearchScreenController.numberPublic;
 
 public class AddReviewScreenController {
     @FXML
@@ -31,11 +38,12 @@ public class AddReviewScreenController {
             return;
         }
 
-        //add to database to use later in review screen controller
-        //TODO: NEED (USER, COURSE, MESSAGE, RATING)
-        CourseReviews tempReview = new CourseReviews();
-        tempReview.setMessage(comment);
-        tempReview.setRating(Integer.parseInt(rating));
+        int ratingToInt = Integer.parseInt(rating);
+        Course tempCourse = new Course(mnemonicPublic, numberPublic, titlePublic);
+        DatabaseController.registerNewCourse(tempCourse);
+        Student tempStudent = DatabaseController.getStudentFromUsername(loggedStudentUsername);
+        CourseReviews tempReview = new CourseReviews(tempStudent, tempCourse, comment, ratingToInt);
+
         // Also, need to check that the user has not already submitted a review for this class
         // Needs username component
         DatabaseController.registerStudentReview(tempReview);
@@ -46,14 +54,14 @@ public class AddReviewScreenController {
             System.out.println(comment);
             FXMLLoader fxmlLoader = new FXMLLoader(CourseReviewsApplication.class.getResource("AddReviewScreen.fxml"));
 
-            Stage stage = (Stage) submitButton.getScene().getWindow();
+            CourseReviewsApplication mainApp = new CourseReviewsApplication();
+            //Stage stage = (Stage) submitButton.getScene().getWindow();
+            Stage stage = new Stage();
+            mainApp.showCourseReviewsScreen(stage);
             stage.close();
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

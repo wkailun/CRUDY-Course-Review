@@ -90,7 +90,7 @@ public class CourseSearchorAddController {
             // Return to course search screen after the delay
             CourseReviewsApplication mainApp = new CourseReviewsApplication();
             Stage stage = new Stage();
-            mainApp.showCourseSearchScreen(stage);
+            mainApp.showCourseReviewsScreen(stage);
             addCourseButton.getScene().getWindow().hide();
 
         }
