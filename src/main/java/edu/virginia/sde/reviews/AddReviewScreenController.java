@@ -58,7 +58,7 @@ public class AddReviewScreenController {
             //Stage stage = (Stage) submitButton.getScene().getWindow();
             Stage stage = new Stage();
             mainApp.showCourseReviewsScreen(stage);
-            stage.close();
+            submitButton.getScene().getWindow().hide();
         }
         catch(Exception e) {
             e.printStackTrace();
