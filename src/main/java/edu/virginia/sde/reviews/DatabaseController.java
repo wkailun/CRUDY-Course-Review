@@ -523,7 +523,7 @@ public class DatabaseController {
 
             // Use parameter binding to avoid SQL injection
             List<CourseReviews> matchingReviews = session.createQuery(
-                            "FROM CourseReviews cr WHERE cr.student = :student AND cr.course = :course", CourseReviews.class)
+                            "FROM CourseReviews cr WHERE cr.student = :student AND cr.courses = :course", CourseReviews.class)
                     .setParameter("student", student)
                     .setParameter("course", course)
                     .list();
