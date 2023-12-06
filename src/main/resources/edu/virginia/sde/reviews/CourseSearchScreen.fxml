@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="720.0" prefWidth="1225.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchScreenController">
     <VBox alignment="CENTER" layoutX="116.0" layoutY="76.0" prefHeight="504.0" prefWidth="993.0" spacing="20" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="116.0" AnchorPane.topAnchor="76.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Course Search" textAlignment="CENTER">
@@ -37,13 +38,19 @@
             </VBox>
         </HBox>
     </VBox>
-    <TextField layoutX="108.0" layoutY="650.0" />
-    <TextField layoutX="332.0" layoutY="650.0" />
-    <TextField layoutX="563.0" layoutY="650.0" />
+    <TextField fx:id="searchCourseTitle" layoutX="108.0" layoutY="650.0" />
+    <TextField fx:id="searchCourseNumber" layoutX="332.0" layoutY="650.0" />
+    <TextField fx:id="searchCourseMnemonic" layoutX="563.0" layoutY="650.0" />
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
     <Text layoutX="563.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Mnemonic" wrappingWidth="99.52734375" />
     <Text layoutX="332.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number" wrappingWidth="88.52734375" />
     <Text layoutX="108.0" layoutY="642.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Title" wrappingWidth="66.52734375" />
     <Button fx:id="searchForCourseButton" layoutX="769.0" layoutY="650.0" mnemonicParsing="false" onAction="#onSearchReviews" prefHeight="25.0" prefWidth="259.0" text="Search for Course" />
+    <Label fx:id="warningLabel" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="685"
+           layoutY="620.0" prefHeight="17.0" prefWidth="410.0">
+        <font>
+            <Font name="Lao Sangam MN" size="13.0"/>
+        </font>
+    </Label>
 </AnchorPane>
 

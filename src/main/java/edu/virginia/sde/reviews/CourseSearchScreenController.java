@@ -20,12 +20,16 @@ public class CourseSearchScreenController {
     private static String mnemonic;
     private static int number;
     private static String title;
+
+    public TextField searchCourseTitle, searchCourseNumber, searchCourseMnemonic;
     
     @FXML
     private Label mainPageLabel;
 
     @FXML
     private Button myReviewsButton, courseReviewsButton, logoutButton, searchForCourseButton;
+    @FXML
+    private Label warningLabel;
 
     @FXML
     private void logoutButtonAction() {
@@ -59,25 +63,94 @@ public class CourseSearchScreenController {
     }
 
     public void onSearchReviews(ActionEvent actionEvent) {
-/*        List<Course> coursesList = DatabaseController.getAllCourses();
+        List<Course> coursesList = DatabaseController.getAllCourses();
         List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
 
-        String temp = txtDepCatalog.getText();
-        String dep = temp.split(" ")[0];
-        String catalog = temp.split(" ")[1];
+        String mnemonicSearchTable = searchCourseMnemonic.getText();
+        String courseSearchTable = searchCourseNumber.getText();
+        String titleSearchTable = searchCourseTitle.getText();
 
         List<CourseReviews> reviewsList = DatabaseController.getAllReviews();
-        List<UserReviewTable> usersReviewTable = new ArrayList<>();
+        List<ReviewedCoursesTable> usersReviewTable = new ArrayList<>();
 
-        for(var review: reviewsList) {
-            UserReviewTable tmpTable = new UserReviewTable();
-            tmpTable.setID(review.getId());
-            if(review.getCourse().getDepartment().equals(dep) && review.getCourse().getCatalogNumber() == Integer.parseInt(catalog)) {
-                tmpTable.usernameProperty().set(review.getStudent().getUsername());
-                tmpTable.messageProperty().set(review.getMessage());
-                tmpTable.ratingProperty().set(review.getRating());
-                usersReviewTable.add(tmpTable);
+        if(mnemonicSearchTable.isEmpty() & courseSearchTable.isEmpty() & titleSearchTable.isEmpty()) {
+            warningLabel.setText("Please populate at least one field to search.");
+
+            for (var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+                tempTable.setCourseMnemonic(course.getMnemonic());
+                tempTable.setCourseTitle(course.getCourseTitle());
+
+                String courseMnemonic = course.getMnemonic();
+                int courseNum = course.getCatalogNumber();
+
+                CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                //tempTable.setCourseRating(reviews.getRating());
+                tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                existingCoursesToPopulateTable.add(tempTable);
             }
+
+        } else if(mnemonicSearchTable.isEmpty() & !courseSearchTable.isEmpty() & !titleSearchTable.isEmpty()) {
+
+
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                int courseCatalogNumberInteger = Integer.parseInt(courseSearchTable);
+                if((course.getCatalogNumber() == courseCatalogNumberInteger) & titleSearchTable.equals(course.getCourseTitle())) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    String courseMnemonic = course.getMnemonic();
+                    int courseNum = course.getCatalogNumber();
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
+
+
+        } else if(!mnemonicSearchTable.isEmpty() && courseSearchTable.isEmpty() && !titleSearchTable.isEmpty()) {
+
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                // Should search for matches on title substrings / exacts
+                if((course.getMnemonic().equals(mnemonicSearchTable)) && (course.getCourseTitle().toLowerCase().contains(titleSearchTable.toLowerCase()))) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    String courseMnemonic = course.getMnemonic();
+                    int courseNum = course.getCatalogNumber();
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
+
+        } else if(!mnemonicSearchTable.isEmpty() && !courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
+
+
+        }
+        // The following only have one field, so they should search all fields for any matches
+        else if(mnemonicSearchTable.isEmpty() && courseSearchTable.isEmpty() && !titleSearchTable.isEmpty()) {
+
+        } else if(!mnemonicSearchTable.isEmpty() && courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
+
+        } else if(mnemonicSearchTable.isEmpty() && !courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
+
         }
 
         ObservableList<ReviewedCoursesTable> existingCoursesToPopulateList = FXCollections.observableArrayList(existingCoursesToPopulateTable);
@@ -93,7 +166,8 @@ public class CourseSearchScreenController {
         courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
 
         TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
-        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));*/
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
+
     }
     // Have to have this reset the table
     @FXML
