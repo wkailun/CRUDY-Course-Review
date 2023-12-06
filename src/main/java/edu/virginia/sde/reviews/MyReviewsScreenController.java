@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUsername;
 
@@ -45,17 +44,17 @@ public class MyReviewsScreenController {
                 FXCollections.observableArrayList(existingMyReviewsToPopulateTable);
         tableMyReviews.setItems(existingMyReviewsToPopulateList);
 
-        configureTableColumn("Course Title", "courseTitle", String.class);
-        configureTableColumn("Mnemonic", "courseMnemonic", String.class);
-        configureTableColumn("Course Number", "courseNumber", Integer.class);
-        configureTableColumn("Course Rating", "courseRating", Integer.class);
+        configureTableColumn("Course Title", "courseTitle");
+        configureTableColumn("Mnemonic", "courseMnemonic");
+        configureTableColumn("Course Number", "courseNumber");
+        configureTableColumn("Course Rating", "courseRating");
 
         tableMyReviews.setOnMouseClicked(this::handleRowClick);
     }
 
 
 
-    private <T> void configureTableColumn(String columnName, String propertyName, Class<T> propertyType) {
+    private <T> void configureTableColumn(String columnName, String propertyName) {
         TableColumn<MyReviewsTable, T> column = new TableColumn<>(columnName);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         tableMyReviews.getColumns().add(column);
@@ -64,7 +63,6 @@ public class MyReviewsScreenController {
         if (event.getClickCount() == 1) {
             MyReviewsTable selectedRow = tableMyReviews.getSelectionModel().getSelectedItem();
             if (selectedRow != null) {
-                System.out.println("Clicked on row: " + selectedRow.getCourseTitle());
                 CourseSearchScreenController.setMnemonic(selectedRow.getCourseMnemonic());
                 CourseSearchScreenController.setNumber(selectedRow.getCourseNumber());
                 CourseSearchScreenController.setTitle(selectedRow.getCourseTitle());

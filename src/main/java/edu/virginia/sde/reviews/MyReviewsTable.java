@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 public class MyReviewsTable {
 
     private IntegerProperty courseNumber, reviewRating;
-    private StringProperty courseTitle, courseMnemonic, reviewComment;
+    private StringProperty courseTitle, courseMnemonic;
 
     public IntegerProperty courseNumberProperty() {
         if (courseNumber == null) {

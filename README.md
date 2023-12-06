@@ -4,7 +4,7 @@
 ## Authors
 1) Name, netid, [GitHub profile name]
 2) Name, netid, [GitHub profile name]
-3) Name, netid, [GitHub profile name]
+3) Joseph Beauchamp, vpd4ve, JBeauch
 4) Davis Wang, bqe6ue, dwang618
 
 ## To Run
@@ -27,11 +27,11 @@ List the primary contributions of each author. It is recommended to update this 
 * as a bulleted list
 * each line starts with an asterisk and a space
 
-### [Author 3 - replace this with their name]
+### Joseph Beauchamp
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* MyReviewsScreenController
+* MyReviewsTable Creation
+* Various FXML formatting
 
 ### [Author 4 - replace this with their name]
 
