@@ -35,11 +35,11 @@ List the primary contributions of each author. It is recommended to update this 
 * Various FXML formatting
 * Initial Screen Swapping Setup
 
-### [Author 4 - replace this with their name]
+### Davis Wang
 
-* Author 4 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Controllers for reviewscreen controller
+* made screen layouts and fxml framework for addreviewscreen and login
+* functiknality for tableviews
 
 ## Issues
 
