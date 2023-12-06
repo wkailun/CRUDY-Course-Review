@@ -2,7 +2,7 @@
 # Homework 6 - Responding to Change
 
 ## Authors
-1) Name, netid, [GitHub profile name]
+1) Lance Shaffer, yem9he, YEM9HE
 2) Karen Wang, vxd4qa, wkailun
 3) Joseph Beauchamp, vpd4ve, JBeauch
 4) Davis Wang, bqe6ue, dwang618
@@ -15,11 +15,11 @@
 
 List the primary contributions of each author. It is recommended to update this with your contributions after each coding session.:
 
-### [Author 1 - replace this with their name]
+### Lance Shaffer
 
-* Author 1 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Created search screen
+* ability to search functinality 
+* database functinality 
 
 ### Karen Wang
 
