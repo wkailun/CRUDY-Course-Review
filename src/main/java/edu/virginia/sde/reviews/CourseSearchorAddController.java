@@ -95,20 +95,4 @@ public class CourseSearchorAddController {
 
         }
     }
-
-    // This has to update the search screen table -- which still have no clue what to do
-    @FXML
-    private void onSearchForCourse(ActionEvent actionEvent) {
-        // Currently buliding out as I ignore course search screen
-
-        String courseMnemonic = textMnemonic.getText();
-        String courseCatalog = textCourseCatalogNumber.getText();
-        String courseAddTitle = textCourseTitle.getText();
-
-        String warning = "";
-        if(courseMnemonic.length() == 0 & courseCatalog.length() == 0 & courseAddTitle.length() == 0) {
-            warning = "Please populate at least one field.";
-            warningLabel.setText(warning);
-        }
-    }
 }

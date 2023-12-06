@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUsername;
 
 public class CourseSearchScreenController {
     private static String mnemonic;
@@ -46,8 +49,7 @@ public class CourseSearchScreenController {
         mainApp.showCourseReviewsScreen(stage);
         courseReviewsButton.getScene().getWindow().hide();
     }
-    // Both add and search actions are linked to the same button, its actions defined below
-    // Their separate purposes are handled in a separate class called "CourseSearchorAddController"
+
     @FXML
     private void searchForCourseButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();
@@ -55,13 +57,84 @@ public class CourseSearchScreenController {
         mainApp.showCourseSearchorAddScreen(stage);
         searchForCourseButton.getScene().getWindow().hide();
     }
+
+    public void onSearchReviews(ActionEvent actionEvent) {
+/*        List<Course> coursesList = DatabaseController.getAllCourses();
+        List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
+
+        String temp = txtDepCatalog.getText();
+        String dep = temp.split(" ")[0];
+        String catalog = temp.split(" ")[1];
+
+        List<CourseReviews> reviewsList = DatabaseController.getAllReviews();
+        List<UserReviewTable> usersReviewTable = new ArrayList<>();
+
+        for(var review: reviewsList) {
+            UserReviewTable tmpTable = new UserReviewTable();
+            tmpTable.setID(review.getId());
+            if(review.getCourse().getDepartment().equals(dep) && review.getCourse().getCatalogNumber() == Integer.parseInt(catalog)) {
+                tmpTable.usernameProperty().set(review.getStudent().getUsername());
+                tmpTable.messageProperty().set(review.getMessage());
+                tmpTable.ratingProperty().set(review.getRating());
+                usersReviewTable.add(tmpTable);
+            }
+        }
+
+        ObservableList<ReviewedCoursesTable> existingCoursesToPopulateList = FXCollections.observableArrayList(existingCoursesToPopulateTable);
+        tableCourses.setItems(existingCoursesToPopulateList);
+
+        TableColumn<ReviewedCoursesTable, String> courseTitleTable = new TableColumn<>("Course Title");
+        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("courseTitle"));
+
+        TableColumn<ReviewedCoursesTable, String> courseMnemonicTable = new TableColumn<>("Mnemonic");
+        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("courseMnemonic"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseCatalogNumberTable = new TableColumn<>("Course Number");
+        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));*/
+    }
     // Have to have this reset the table
     @FXML
     private void resetTableOnAction() {
-        CourseReviewsApplication mainApp = new CourseReviewsApplication();
-        Stage stage = new Stage();
-        mainApp.showCourseSearchorAddScreen(stage);
-        searchForCourseButton.getScene().getWindow().hide();
+        List<Course> coursesList = DatabaseController.getAllCourses();
+        List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
+
+        for (var course : coursesList) {
+            ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+            tempTable.setCourseNumber(course.getCatalogNumber());
+            tempTable.setCourseMnemonic(course.getMnemonic());
+            tempTable.setCourseTitle(course.getCourseTitle());
+
+            String courseMnemonic = course.getMnemonic();
+            int courseNum = course.getCatalogNumber();
+
+            CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+            //tempTable.setCourseRating(reviews.getRating());
+            tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+            existingCoursesToPopulateTable.add(tempTable);
+        }
+
+        ObservableList<ReviewedCoursesTable> existingCoursesToPopulateList = FXCollections.observableArrayList(existingCoursesToPopulateTable);
+        tableCourses.setItems(existingCoursesToPopulateList);
+
+        TableColumn<ReviewedCoursesTable, String> courseTitleTable = new TableColumn<>("Course Title");
+        courseTitleTable.setCellValueFactory(new PropertyValueFactory<>("courseTitle"));
+
+        TableColumn<ReviewedCoursesTable, String> courseMnemonicTable = new TableColumn<>("Mnemonic");
+        courseMnemonicTable.setCellValueFactory(new PropertyValueFactory<>("courseMnemonic"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseCatalogNumberTable = new TableColumn<>("Course Number");
+        courseCatalogNumberTable.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
+
+        TableColumn<ReviewedCoursesTable, Integer> courseRatingTable = new TableColumn<>("Course Rating");
+        courseRatingTable.setCellValueFactory(new PropertyValueFactory<>("courseRating"));
+
+        tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
+        tableCourses.setOnMouseClicked(this::handleRowClick);
+        setReviewItems(false);
     }
     public TableView tableCourses;
     public Button btnSubmit;
@@ -121,6 +194,8 @@ public class CourseSearchScreenController {
             }
         }
     }
+
+
 
     public void setReviewItems(boolean b) {
         courseReviewsButton.setVisible(b);

@@ -18,7 +18,6 @@
       <children>
             <TextField fx:id="textMnemonic" layoutX="260.0" layoutY="63.0" prefHeight="48.0" prefWidth="290.0" />
             <TextField fx:id="textCourseCatalogNumber" layoutX="260.0" layoutY="146.0" prefHeight="48.0" prefWidth="290.0" />
-            <Button fx:id="searchForCourseButton" layoutX="430.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" onAction="#onSearchForCourse" text="Search" />
             <Button fx:id="addCourseButton" layoutX="272.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" onAction="#onAddCourse" text="Add Course" />
             <Text layoutX="69.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number, 4 Integers  Required, Example: 3140" wrappingWidth="138.13671875" />
             <Text layoutX="231.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill Fields to Search or Add Course to List" wrappingWidth="219.13671875" />
