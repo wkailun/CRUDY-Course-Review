@@ -3,7 +3,7 @@
 
 ## Authors
 1) Name, netid, [GitHub profile name]
-2) Name, netid, [GitHub profile name]
+2) Karen Wang, vxd4qa, wkailun
 3) Joseph Beauchamp, vpd4ve, JBeauch
 4) Davis Wang, bqe6ue, dwang618
 
@@ -21,11 +21,12 @@ List the primary contributions of each author. It is recommended to update this 
 * as a bulleted list
 * each line starts with an asterisk and a space
 
-### [Author 2 - replace this with their name]
+### Karen Wang
 
-* Author 2 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Assisted in RegisterScreenController
+* Contributed in FXML formatting
+* Helped with Average Calculations
+* Assisted with table formatting
 
 ### Joseph Beauchamp
 
