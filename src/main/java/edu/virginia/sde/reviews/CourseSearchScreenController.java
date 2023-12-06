@@ -66,7 +66,7 @@ public class CourseSearchScreenController {
         List<Course> coursesList = DatabaseController.getAllCourses();
         List<ReviewedCoursesTable> existingCoursesToPopulateTable = new ArrayList<>();
 
-        String mnemonicSearchTable = searchCourseMnemonic.getText();
+        String mnemonicSearchTable = searchCourseMnemonic.getText().toUpperCase();
         String courseSearchTable = searchCourseNumber.getText();
         String titleSearchTable = searchCourseTitle.getText();
 
@@ -142,14 +142,100 @@ public class CourseSearchScreenController {
 
         } else if(!mnemonicSearchTable.isEmpty() && !courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
 
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
 
+                int courseCatalogNumberInteger = Integer.parseInt(courseSearchTable);
+                if((course.getCatalogNumber() == courseCatalogNumberInteger) & mnemonicSearchTable.equals(course.getMnemonic())) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    String courseMnemonic = course.getMnemonic();
+                    int courseNum = course.getCatalogNumber();
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
+
+        } else if(!mnemonicSearchTable.isEmpty() && !courseSearchTable.isEmpty() && !titleSearchTable.isEmpty()) {
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                int courseCatalogNumberInteger = Integer.parseInt(courseSearchTable);
+                if((course.getCatalogNumber() == courseCatalogNumberInteger) & (mnemonicSearchTable.equals(course.getMnemonic())) & (course.getCourseTitle().toLowerCase().contains(titleSearchTable.toLowerCase()))) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
         }
-        // The following only have one field, so they should search all fields for any matches
         else if(mnemonicSearchTable.isEmpty() && courseSearchTable.isEmpty() && !titleSearchTable.isEmpty()) {
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                if((course.getCourseTitle().toLowerCase().contains(titleSearchTable.toLowerCase()))) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
 
         } else if(!mnemonicSearchTable.isEmpty() && courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                if((mnemonicSearchTable.equals(course.getMnemonic()))) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
 
         } else if(mnemonicSearchTable.isEmpty() && !courseSearchTable.isEmpty() && titleSearchTable.isEmpty()) {
+            for(var course : coursesList) {
+                ReviewedCoursesTable tempTable = new ReviewedCoursesTable();
+                tempTable.setCourseNumber(course.getCatalogNumber());
+
+                int courseCatalogNumberInteger = Integer.parseInt(courseSearchTable);
+                if((course.getCatalogNumber() == courseCatalogNumberInteger)) {
+                    tempTable.setCourseNumber(course.getCatalogNumber());
+                    tempTable.setCourseMnemonic(course.getMnemonic());
+                    tempTable.setCourseTitle(course.getCourseTitle());
+
+                    //CourseReviews courseSearch = DatabaseController.getCourseByMnemonicAndCourseNumber(mnemonicSearchTable.toUpperCase(),courseCatalogNumberInteger);
+                    CourseReviews reviews = DatabaseController.getCourseReviewFromMnemonicAndNumber(course);
+                    tempTable.setCourseRating(reviews != null ? reviews.getRating() : 0);
+
+                    existingCoursesToPopulateTable.add(tempTable);
+                }
+            }
 
         }
 
