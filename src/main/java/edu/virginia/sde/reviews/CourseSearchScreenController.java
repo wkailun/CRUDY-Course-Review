@@ -300,6 +300,7 @@ public class CourseSearchScreenController {
         tableCourses.getColumns().setAll(courseTitleTable, courseMnemonicTable, courseCatalogNumberTable, courseRatingTable);
         tableCourses.setOnMouseClicked(this::handleRowClick);
         setReviewItems(false);
+        initializeTables();
     }
     public TableView tableCourses;
     public Button btnSubmit;

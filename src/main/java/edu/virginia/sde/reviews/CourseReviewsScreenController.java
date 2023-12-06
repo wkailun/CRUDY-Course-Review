@@ -95,14 +95,22 @@ public class CourseReviewsScreenController {
                 myReviewExists = true;
                 MyReviewsTable tempTable = new MyReviewsTable();
 
-                tempTable.setCourseTitle(review.getCourses().getCourseTitle());
-                tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
-                tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
+                tempTable.setReviewMessage(review.getMessage());
+                tempTable.setTimeStamp(CourseSearchScreenController.getNumber());
                 tempTable.setCourseRating(review.getRating());
 
                 existingMyReviewsToPopulateTable.add(tempTable);
             }
         }
+
+
+        configureTableColumn(myCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
+        configureTableColumn(myCourseSpecReviews, "Timestamp", "timeStamp", Integer.class);
+        configureTableColumn(myCourseSpecReviews, "Comments", "reviewMessage", String.class);
+
+        configureTableColumn(allCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
+        configureTableColumn(allCourseSpecReviews, "Timestamp", "timeStamp", Integer.class);
+        configureTableColumn(allCourseSpecReviews, "Comments", "reviewMessage", String.class);
 
         ObservableList<MyReviewsTable> existingMyCourseSpecReviewsToPopulateList =
                 FXCollections.observableArrayList(courseSpecificReviewsForTable);
@@ -112,21 +120,6 @@ public class CourseReviewsScreenController {
         ObservableList<MyReviewsTable> existingMyReviewsToPopulateList =
                 FXCollections.observableArrayList(existingMyReviewsToPopulateTable);
         myCourseSpecReviews.setItems(existingMyReviewsToPopulateList);
-
-        configureTableColumn(myCourseSpecReviews, "Course Title", "courseTitle", String.class);
-        configureTableColumn(myCourseSpecReviews,"Mnemonic", "courseMnemonic", String.class);
-        configureTableColumn(myCourseSpecReviews,"Course Number", "courseNumber", Integer.class);
-        configureTableColumn(myCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
-        configureTableColumn(myCourseSpecReviews, "Comments", "courseComments", String.class);
-        configureTableColumn(myCourseSpecReviews, "Timestamp", "courseComments", Timestamp.class);
-
-        configureTableColumn(allCourseSpecReviews, "Course Title", "courseTitle", String.class);
-        configureTableColumn(allCourseSpecReviews,"Mnemonic", "courseMnemonic", String.class);
-        configureTableColumn(allCourseSpecReviews,"Course Number", "courseNumber", Integer.class);
-        configureTableColumn(allCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
-        configureTableColumn(allCourseSpecReviews, "Comments", "courseComments", String.class);
-        configureTableColumn(allCourseSpecReviews, "Timestamp", "courseTimestamp", Timestamp.class);
-
         //tableMyReviews.setOnMouseClicked(this::handleRowClick);
 
 
@@ -190,13 +183,13 @@ public class CourseReviewsScreenController {
     @FXML
     private void deleteButtonAction() {
         //database remove reviews in my own tableview
-        if(myReviewExists) {
+        if(!myReviewExists) {
             warningLabel.setText("You do not have a review to delete rofl");
             return;
         }
         System.out.println("review exists?");
         DatabaseController.deleteStudentReview(myExistingReview);
-
+        initializeTables();
     }
     @FXML
     private void backButtonAction() {

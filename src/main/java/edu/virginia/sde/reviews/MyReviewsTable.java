@@ -7,8 +7,18 @@ import javafx.beans.property.StringProperty;
 
 public class MyReviewsTable {
 
-    private IntegerProperty courseNumber, reviewRating;
-    private StringProperty courseTitle, courseMnemonic;
+    private IntegerProperty courseNumber, courseRating, timeStamp;
+    private StringProperty courseTitle, courseMnemonic, reviewMessage;
+
+    public IntegerProperty timeStampProperty() {
+        if(timeStamp == null) {
+            courseNumber = new SimpleIntegerProperty(this, " Time Stamp");
+        }
+        return courseNumber;
+    }
+    public void setTimeStamp(Integer value) { courseNumberProperty().setValue(value);}
+    public Integer getTimeStamp() { return courseNumberProperty().get();}
+
 
     public IntegerProperty courseNumberProperty() {
         if (courseNumber == null) {
@@ -21,10 +31,10 @@ public class MyReviewsTable {
 
 
     public IntegerProperty courseRatingProperty() {
-        if (reviewRating == null) {
-            reviewRating = new SimpleIntegerProperty(this, "Course Rating");
+        if (courseRating == null) {
+            courseRating = new SimpleIntegerProperty(this, "Course Rating");
         }
-        return reviewRating;
+        return courseRating;
     }
     public void setCourseRating(Integer value) {
         courseRatingProperty().set(value);
@@ -61,5 +71,17 @@ public class MyReviewsTable {
         return courseTitleProperty().get();
     }
 
+    public StringProperty reviewMessageProperty() {
+        if (reviewMessage == null) {
+            reviewMessage = new SimpleStringProperty(this, "Review Message");
+        }
+        return reviewMessage;
+    }
+    public void setReviewMessage(String value) {
+        reviewMessageProperty().set(value);
+    }
+    public String getReviewMessage() {
+        return reviewMessageProperty().get();
+    }
 
 }
