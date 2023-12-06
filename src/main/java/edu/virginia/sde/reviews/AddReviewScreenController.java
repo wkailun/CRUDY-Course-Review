@@ -33,34 +33,48 @@ public class AddReviewScreenController {
         String rating = ratingText.getText();
         String comment = commentText.getText();
 
-        if(!(rating.equals("1") || rating.equals("2") || rating.equals("3") || rating.equals("4") || rating.equals("5"))) {
+        if (!(rating.equals("1") || rating.equals("2") || rating.equals("3") || rating.equals("4") || rating.equals("5"))) {
             warninglabel.setText("Rating must be an integer between 1 and 5");
             return;
         }
 
         int ratingToInt = Integer.parseInt(rating);
-        Course tempCourse = new Course(mnemonicPublic, numberPublic, titlePublic);
-        DatabaseController.registerNewCourse(tempCourse);
+
+        // Check if the course already exists in the database
+        Course tempCourse = DatabaseController.getCourseByMnemonicNumberTitle(mnemonicPublic, numberPublic, titlePublic);
+
+        if (tempCourse == null) {
+            // Create course if course does not exist
+            tempCourse = new Course(mnemonicPublic, numberPublic, titlePublic);
+            DatabaseController.registerNewCourse(tempCourse);
+        }
+
         Student tempStudent = DatabaseController.getStudentFromUsername(loggedStudentUsername);
-        CourseReviews tempReview = new CourseReviews(tempStudent, tempCourse, comment, ratingToInt);
 
-        // Also, need to check that the user has not already submitted a review for this class
-        // Needs username component
-        DatabaseController.registerStudentReview(tempReview);
+        // Check if the user has already submitted a review for this class
+        CourseReviews existingReview = DatabaseController.getReviewByStudentAndCourse(tempStudent, tempCourse);
 
+        if (existingReview != null) {
+            // Update the existing review
+            existingReview.setMessage(comment);
+            existingReview.setRating(ratingToInt);
+        } else {
+            // Create a new review
+            CourseReviews newReview = new CourseReviews(tempStudent, tempCourse, comment, ratingToInt);
+            DatabaseController.registerStudentReview(newReview);
+        }
 
         try {
-            //temporary send to review screen
+            // temporary send to review screen
             System.out.println(comment);
             FXMLLoader fxmlLoader = new FXMLLoader(CourseReviewsApplication.class.getResource("AddReviewScreen.fxml"));
 
             CourseReviewsApplication mainApp = new CourseReviewsApplication();
-            //Stage stage = (Stage) submitButton.getScene().getWindow();
+            // Stage stage = (Stage) submitButton.getScene().getWindow();
             Stage stage = new Stage();
             mainApp.showCourseReviewsScreen(stage);
             submitButton.getScene().getWindow().hide();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
