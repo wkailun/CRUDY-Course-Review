@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import org.hibernate.dialect.Database;
 
 import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,11 +117,15 @@ public class CourseReviewsScreenController {
         configureTableColumn(myCourseSpecReviews,"Mnemonic", "courseMnemonic", String.class);
         configureTableColumn(myCourseSpecReviews,"Course Number", "courseNumber", Integer.class);
         configureTableColumn(myCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
+        configureTableColumn(myCourseSpecReviews, "Comments", "courseComments", String.class);
+        configureTableColumn(myCourseSpecReviews, "Timestamp", "courseComments", Timestamp.class);
 
         configureTableColumn(allCourseSpecReviews, "Course Title", "courseTitle", String.class);
         configureTableColumn(allCourseSpecReviews,"Mnemonic", "courseMnemonic", String.class);
         configureTableColumn(allCourseSpecReviews,"Course Number", "courseNumber", Integer.class);
         configureTableColumn(allCourseSpecReviews,"Course Rating", "courseRating", Integer.class);
+        configureTableColumn(allCourseSpecReviews, "Comments", "courseComments", String.class);
+        configureTableColumn(allCourseSpecReviews, "Timestamp", "courseTimestamp", Timestamp.class);
 
         //tableMyReviews.setOnMouseClicked(this::handleRowClick);
 
