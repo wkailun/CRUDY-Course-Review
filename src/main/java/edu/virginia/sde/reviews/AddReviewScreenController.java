@@ -32,7 +32,7 @@ public class AddReviewScreenController {
         }
 
         //add to database to use later in review screen controller
-        //TODO
+        //TODO: NEED (USER, COURSE, MESSAGE, RATING)
         CourseReviews tempReview = new CourseReviews();
         tempReview.setMessage(comment);
         tempReview.setRating(Integer.parseInt(rating));

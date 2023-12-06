@@ -57,6 +57,7 @@
                                     mnemonicParsing="false" text="Delete Review"/>
                             <Button fx:id="backbutton" onAction="#backButtonAction" layoutX="234.0" layoutY="53.0"
                                     mnemonicParsing="false" text="Back"/>
+                            <Label fx:id="warningLabel" layoutX="21.0" layoutY="95.0" text=""/>
                             <Label layoutX="21.0" layoutY="115.0" text="My Reviews "/>
                             <Label fx:id="reviewTitle" layoutX="36.0" layoutY="6.0" prefHeight="18.0" prefWidth="377.0"
                                    text="Mncemonic, Number, Title "/>

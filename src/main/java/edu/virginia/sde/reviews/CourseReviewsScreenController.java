@@ -22,14 +22,18 @@ import static edu.virginia.sde.reviews.LoginScreenController.loggedStudentUserna
 
 public class CourseReviewsScreenController {
     @FXML
+    private Label warningLabel;
+    @FXML
     private Label reviewTitle;
     @FXML
-    private Label avgratingLabel;
+    private Label avgratinglabel;
     @FXML
     private Button addbutton, deletebutton, backbutton; // Use the correct Button class
     @FXML
     private TableView allCourseSpecReviews, myCourseSpecReviews, myReviewedCourses;
 
+    private boolean myReviewExists;
+    private CourseReviews myExistingReview;
     @FXML
     public void initialize() {
         initializeTables();
@@ -49,6 +53,7 @@ public class CourseReviewsScreenController {
     }
 
     public void initializeTables(){
+        myReviewExists = false;
         String mnemonic = CourseSearchScreenController.getMnemonic();
         int number = CourseSearchScreenController.getNumber();
         String title = CourseSearchScreenController.getTitle();
@@ -75,13 +80,15 @@ public class CourseReviewsScreenController {
         }
 
         double avg = getAvgRating(courseSpecificReviewsList);
-        avgratingLabel.setText("Average Rating is: " + avg);
+        avgratinglabel.setText("Average Rating is: " + avg);
 
 
         List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
         List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();
 
         for (CourseReviews review : reviewsList) {
+            myExistingReview = review;
+            myReviewExists = true;
             MyReviewsTable tempTable = new MyReviewsTable();
 
             tempTable.setCourseTitle(review.getCourses().getCourseTitle());
@@ -152,6 +159,11 @@ public class CourseReviewsScreenController {
 
     @FXML
     private void addButtonAction() {
+        //myReviewExists = true;
+        if(myReviewExists) {
+            warningLabel.setText("You can only review a course once lil brah");
+            return;
+        }
         try {
             // temporary send to addreview screen
             FXMLLoader fxmlLoader = new FXMLLoader(CourseReviewsApplication.class.getResource("AddReviewScreen.fxml"));
@@ -169,7 +181,13 @@ public class CourseReviewsScreenController {
     @FXML
     private void deleteButtonAction() {
         //database remove reviews in my own tableview
-        System.out.println("yippee");
+        if(myReviewExists) {
+            warningLabel.setText("You do not have a review to delete rofl");
+            return;
+        }
+        System.out.println("review exists?");
+        DatabaseController.deleteStudentReview(myExistingReview);
+
     }
     @FXML
     private void backButtonAction() {

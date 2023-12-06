@@ -237,6 +237,27 @@ public class DatabaseController {
         sessionFactory.close();
     }
 
+    public static void deleteStudentReview(CourseReviews reviewToDelete) {
+        Configuration hibernateConfiguration = new Configuration();
+        hibernateConfiguration.configure("hibernate.cfg.xml");
+        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+
+        if (reviewToDelete != null) {
+            session.delete(reviewToDelete);
+            System.out.println(reviewToDelete + " deleted successfully.");
+        } else {
+            System.out.println(reviewToDelete + " not found.");
+        }
+
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
+    }
+
     // Get all existing reviews for courses
     public static List<CourseReviews> getAllReviews() {
         Configuration hibernateConfiguration = new Configuration();
