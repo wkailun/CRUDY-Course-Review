@@ -109,52 +109,32 @@ public class DatabaseController {
         return courseReviewsListByStudentName;
     }
 
+    public static Student getStudentFromUsername(String username) {
+        Student student;
 
-
-
-    // Register student review
- /*   public static void registerStudentReview(CourseReviews review, String studentUsername) {
         Configuration hibernateConfiguration = new Configuration();
         hibernateConfiguration.configure("hibernate.cfg.xml");
         SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
 
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
 
-        // Fetch the student from the database using the username
-        Student student = getStudentByUsername(studentUsername);
+            List<Student> matchingStudents = session.createQuery(
+                            "FROM Student s WHERE s.username1 = :username", Student.class)
+                    .setParameter("username", username)
+                    .list();
 
-        // Set the student and course for the review
-        review.setStudent(student);
+            if (!matchingStudents.isEmpty()) {
+                student = matchingStudents.get(0);
+            } else {
+                student = null;
+            }
 
-        // Save the review
-        session.save(review);
-
-        session.getTransaction().commit();
-        session.close();
-        sessionFactory.close();
-    }
-
-    // Method to get a student by username
-    private static Student getStudentByUsername(String username) {
-        Configuration hibernateConfiguration = new Configuration();
-        hibernateConfiguration.configure("hibernate.cfg.xml");
-        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        // Query to get the student by username
-        Student student = (Student) session.createQuery("from Student where username1 = :username")
-                .setParameter("username", username)
-                .uniqueResult();
-
-        session.getTransaction().commit();
-        session.close();
-        sessionFactory.close();
+            session.getTransaction().commit();
+        }
 
         return student;
-    }*/
+    }
 
     // Course registration
     // Checking whether the attempted course registration exists or not
@@ -204,22 +184,6 @@ public class DatabaseController {
         sessionFactory.close();
     }
 
-/*    // Register student review
-    public static void registerStudentReview(CourseReviews review) {
-        String username = LoginScreenController.getUsername();
-        Configuration hibernateConfiguration = new Configuration();
-        hibernateConfiguration.configure("hibernate.cfg.xml");
-        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        session.save(review);
-
-        session.getTransaction().commit();
-        session.close();
-        sessionFactory.close();
-    }*/
     // Register student review
     public static void registerStudentReview(CourseReviews review) {
         String username = LoginScreenController.getUsername();
