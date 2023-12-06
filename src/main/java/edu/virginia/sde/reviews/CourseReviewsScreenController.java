@@ -44,8 +44,8 @@ public class CourseReviewsScreenController {
 
         //LATER CHANGE TO REVIEW LIST FOR A SPECIFIC COURSE REPRESENTED BY COURSETITLELABEL
         List<CourseReviews> allReviewsList = DatabaseController.getAllReviews();
-        List<CourseReviews> courseSpecReviewsList = new ArrayList<>();
-        List<MyReviewsTable> courseSpecReviewsForTable = new ArrayList<>();
+        List<CourseReviews> courseSpecificReviewsList = new ArrayList<>();
+        List<MyReviewsTable> courseSpecificReviewsForTable = new ArrayList<>();
 
         for(var courseReview : allReviewsList) {
             MyReviewsTable tempTable = new MyReviewsTable();
@@ -55,12 +55,12 @@ public class CourseReviewsScreenController {
 
             if(courseReview.courses.getCourseTitle().equals(title)) {
                 tempTable.setCourseRating(courseReview.getRating());
-                courseSpecReviewsList.add(courseReview);
-                courseSpecReviewsForTable.add(tempTable);
+                courseSpecificReviewsList.add(courseReview);
+                courseSpecificReviewsForTable.add(tempTable);
             }
         }
 
-        //double avg = getAvgRating(courseSpecReviewsList);
+        //double avg = getAvgRating(courseSpecificReviewsList);
         //avgratinglabel.setText("Average Rating is: " + avg)
 
 
@@ -79,7 +79,7 @@ public class CourseReviewsScreenController {
         }
 
         ObservableList<MyReviewsTable> existingMyCourseSpecReviewsToPopulateList =
-                FXCollections.observableArrayList(courseSpecReviewsForTable);
+                FXCollections.observableArrayList(courseSpecificReviewsForTable);
 //        myCourseSpecReviews.setItems(existingMyCourseSpecReviewsToPopulateList);
         allCourseSpecReviews.setItems(existingMyCourseSpecReviewsToPopulateList);
 
