@@ -32,6 +32,7 @@ List the primary contributions of each author. It is recommended to update this 
 * MyReviewsScreenController
 * MyReviewsTable Creation
 * Various FXML formatting
+* Initial Screen Swapping Setup
 
 ### [Author 4 - replace this with their name]
 

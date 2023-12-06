@@ -41,8 +41,6 @@ public class CourseSearchScreenController {
         logoutButton.getScene().getWindow().hide();
     }
 
-    //    public static String mnemonicPublic, titlePublic;
-    //    public static int numberPublic;
     @FXML
     private void myReviewsButtonAction() {
         CourseReviewsApplication mainApp = new CourseReviewsApplication();

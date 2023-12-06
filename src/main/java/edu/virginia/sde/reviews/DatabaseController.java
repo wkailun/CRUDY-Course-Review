@@ -485,4 +485,58 @@ public class DatabaseController {
         return 0;
     }
 
+    public static Course getCourseByMnemonicNumberTitle(String mnemonicPublic, int numberPublic, String titlePublic) {
+        Configuration hibernateConfiguration = new Configuration();
+        hibernateConfiguration.configure("hibernate.cfg.xml");
+        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            // Use parameter binding to avoid SQL injection
+            List<Course> matchingCourses = session.createQuery(
+                            "FROM Course c WHERE c.Mnemonic = :mnemonic AND c.catalogNumber = :number AND c.courseTitle = :title", Course.class)
+                    .setParameter("mnemonic", mnemonicPublic)
+                    .setParameter("number", numberPublic)
+                    .setParameter("title", titlePublic)
+                    .list();
+
+            session.getTransaction().commit();
+
+            // If a course is found, return the first one; otherwise, return null
+            return matchingCourses.isEmpty() ? null : matchingCourses.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            sessionFactory.close();
+        }
+    }
+
+    public static CourseReviews getReviewByStudentAndCourse(Student student, Course course) {
+        Configuration hibernateConfiguration = new Configuration();
+        hibernateConfiguration.configure("hibernate.cfg.xml");
+        SessionFactory sessionFactory = hibernateConfiguration.buildSessionFactory();
+
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            // Use parameter binding to avoid SQL injection
+            List<CourseReviews> matchingReviews = session.createQuery(
+                            "FROM CourseReviews cr WHERE cr.student = :student AND cr.courses = :course", CourseReviews.class)
+                    .setParameter("student", student)
+                    .setParameter("course", course)
+                    .list();
+
+            session.getTransaction().commit();
+
+            // If a review is found, return the first one; otherwise, return null
+            return matchingReviews.isEmpty() ? null : matchingReviews.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            sessionFactory.close();
+        }
+    }
 }
