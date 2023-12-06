@@ -34,6 +34,20 @@ public class CourseReviewsScreenController {
     public void initialize() {
         initializeTables();
     }
+    public double getAvgRating(List<CourseReviews> reviewsList) {
+        if (reviewsList.isEmpty()) {
+            return 0.0;
+        }
+
+        double totalRating = 0.0;
+
+        for (CourseReviews review : reviewsList) {
+            totalRating += review.getRating();
+        }
+
+        return totalRating / reviewsList.size();
+    }
+
     public void initializeTables(){
         String mnemonic = CourseSearchScreenController.getMnemonic();
         int number = CourseSearchScreenController.getNumber();
@@ -60,8 +74,8 @@ public class CourseReviewsScreenController {
             }
         }
 
-        //double avg = getAvgRating(courseSpecificReviewsList);
-        //avgratinglabel.setText("Average Rating is: " + avg)
+        double avg = getAvgRating(courseSpecificReviewsList);
+        avgratingLabel.setText("Average Rating is: " + avg);
 
 
         List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
