@@ -12,7 +12,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import org.hibernate.dialect.Database;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,19 +43,26 @@ public class CourseReviewsScreenController {
         reviewTitle.setText(text);
 
         //LATER CHANGE TO REVIEW LIST FOR A SPECIFIC COURSE REPRESENTED BY COURSETITLELABEL
-        List<CourseReviews> courseSpecReviewsList = DatabaseController.getAllReviews();
+        List<CourseReviews> allReviewsList = DatabaseController.getAllReviews();
+        List<CourseReviews> courseSpecReviewsList = new ArrayList<>();
         List<MyReviewsTable> courseSpecReviewsForTable = new ArrayList<>();
 
-        for (CourseReviews review : courseSpecReviewsList) {
+        for(var courseReview : allReviewsList) {
             MyReviewsTable tempTable = new MyReviewsTable();
+            tempTable.setCourseTitle(title);
+            tempTable.setCourseNumber(number);
+            tempTable.setCourseMnemonic(mnemonic);
 
-            tempTable.setCourseTitle(review.getCourses().getCourseTitle());
-            tempTable.setCourseNumber(review.getCourses().getCatalogNumber());
-            tempTable.setCourseMnemonic(review.getCourses().getMnemonic());
-            tempTable.setCourseRating(review.getRating());
-
-            courseSpecReviewsForTable.add(tempTable);
+            if(courseReview.courses.getCourseTitle().equals(title)) {
+                tempTable.setCourseRating(courseReview.getRating());
+                courseSpecReviewsList.add(courseReview);
+                courseSpecReviewsForTable.add(tempTable);
+            }
         }
+
+        //double avg = getAvgRating(courseSpecReviewsList);
+        //avgratinglabel.setText("Average Rating is: " + avg)
+
 
         List<CourseReviews> reviewsList = DatabaseController.getAllReviewsByStudentName(loggedStudentUsername);
         List<MyReviewsTable> existingMyReviewsToPopulateTable = new ArrayList<>();

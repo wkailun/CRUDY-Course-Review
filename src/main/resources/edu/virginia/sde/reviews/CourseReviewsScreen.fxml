@@ -60,7 +60,7 @@
                             <Label layoutX="21.0" layoutY="115.0" text="My Reviews "/>
                             <Label fx:id="reviewTitle" layoutX="36.0" layoutY="6.0" prefHeight="18.0" prefWidth="377.0"
                                    text="Mncemonic, Number, Title "/>
-                            <Label id="avgratinglabel" layoutX="36.0" layoutY="24.0" text="Average Rating"/>
+                            <Label fx:id="avgratinglabel" layoutX="36.0" layoutY="24.0" text="Average Rating"/>
                         </children>
                     </AnchorPane>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="476.0">
